@@ -51,6 +51,8 @@ namespace Restriction_Operators
 
         public static void WhereSimple1()
         {
+            Console.WriteLine("This sample uses where to find all elements of an array less than 5.");
+
             int[] numbers = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
 
             var numbersLessThanFive = from n in numbers
@@ -67,6 +69,8 @@ namespace Restriction_Operators
 
         public static void WhereSimple2()
         {
+            Console.WriteLine("This sample uses where to find all products that are out of stock.");
+
             var productList = factory.GetProductList();
 
             var soldOutProducts = from product in productList
@@ -83,6 +87,7 @@ namespace Restriction_Operators
 
         public static void WhereSimple3()
         {
+            Console.WriteLine("This sample uses where to find all products that are in stock and cost more than 3.00 per unit.");
             var productList = factory.GetProductList();
 
             var expensiveInStockProducts = from product in productList
@@ -99,6 +104,7 @@ namespace Restriction_Operators
 
         public static void WhereDrillDown()
         {
+            Console.WriteLine("This sample uses where to find all customers in Washington and then uses the resulting sequence to drill down into their orders.");
             List<Customer> customers = factory.GetCustomerList();
 
             var waCustomers = from customer in customers
@@ -120,6 +126,7 @@ namespace Restriction_Operators
 
         public static void WhereIndexed()
         {
+            Console.WriteLine("This sample demonstrates an indexed Where clause that returns digits whose name is shorter than their value.");
             string[] digits = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
 
             var shortDigits = digits.Where((digit, index) => digit.Length < index);

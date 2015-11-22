@@ -1,0 +1,7 @@
+G:\Projects\CSharp\LINQ Samples\Projection Operators\bin\Debug\Projection Operators.exe
+G:\Projects\CSharp\LINQ Samples\Projection Operators\bin\Debug\Projection Operators.pdb
+G:\Projects\CSharp\LINQ Samples\Projection Operators\bin\Debug\DataSource.dll
+G:\Projects\CSharp\LINQ Samples\Projection Operators\bin\Debug\DataSource.pdb
+G:\Projects\CSharp\LINQ Samples\Projection Operators\obj\x86\Debug\Projection Operators.csprojResolveAssemblyReference.cache
+G:\Projects\CSharp\LINQ Samples\Projection Operators\obj\x86\Debug\Projection Operators.exe
+G:\Projects\CSharp\LINQ Samples\Projection Operators\obj\x86\Debug\Projection Operators.pdb

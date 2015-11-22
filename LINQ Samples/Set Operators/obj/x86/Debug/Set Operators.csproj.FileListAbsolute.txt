@@ -1,0 +1,4 @@
+G:\Projects\CSharp\LINQ Samples\Set Operators\bin\Debug\Set Operators.exe
+G:\Projects\CSharp\LINQ Samples\Set Operators\bin\Debug\Set Operators.pdb
+G:\Projects\CSharp\LINQ Samples\Set Operators\obj\x86\Debug\Set Operators.exe
+G:\Projects\CSharp\LINQ Samples\Set Operators\obj\x86\Debug\Set Operators.pdb

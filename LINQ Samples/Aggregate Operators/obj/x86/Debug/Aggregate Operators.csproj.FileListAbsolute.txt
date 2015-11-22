@@ -1,0 +1,4 @@
+G:\Projects\CSharp\LINQ Samples\Aggregate Operators\bin\Debug\Aggregate Operators.exe
+G:\Projects\CSharp\LINQ Samples\Aggregate Operators\bin\Debug\Aggregate Operators.pdb
+G:\Projects\CSharp\LINQ Samples\Aggregate Operators\obj\x86\Debug\Aggregate Operators.exe
+G:\Projects\CSharp\LINQ Samples\Aggregate Operators\obj\x86\Debug\Aggregate Operators.pdb

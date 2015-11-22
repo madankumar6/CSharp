@@ -1,0 +1,4 @@
+G:\Projects\CSharp\LINQ Samples\Grouping Operators\bin\Debug\Grouping Operators.exe
+G:\Projects\CSharp\LINQ Samples\Grouping Operators\bin\Debug\Grouping Operators.pdb
+G:\Projects\CSharp\LINQ Samples\Grouping Operators\obj\x86\Debug\Grouping Operators.exe
+G:\Projects\CSharp\LINQ Samples\Grouping Operators\obj\x86\Debug\Grouping Operators.pdb

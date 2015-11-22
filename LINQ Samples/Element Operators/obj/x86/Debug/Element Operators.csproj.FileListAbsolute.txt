@@ -1,0 +1,4 @@
+G:\Projects\CSharp\LINQ Samples\Element Operators\bin\Debug\Element Operators.exe
+G:\Projects\CSharp\LINQ Samples\Element Operators\bin\Debug\Element Operators.pdb
+G:\Projects\CSharp\LINQ Samples\Element Operators\obj\x86\Debug\Element Operators.exe
+G:\Projects\CSharp\LINQ Samples\Element Operators\obj\x86\Debug\Element Operators.pdb

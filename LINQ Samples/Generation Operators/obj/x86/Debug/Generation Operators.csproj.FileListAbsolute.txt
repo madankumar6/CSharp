@@ -1,0 +1,4 @@
+G:\Projects\CSharp\LINQ Samples\Generation Operators\bin\Debug\Generation Operators.exe
+G:\Projects\CSharp\LINQ Samples\Generation Operators\bin\Debug\Generation Operators.pdb
+G:\Projects\CSharp\LINQ Samples\Generation Operators\obj\x86\Debug\Generation Operators.exe
+G:\Projects\CSharp\LINQ Samples\Generation Operators\obj\x86\Debug\Generation Operators.pdb

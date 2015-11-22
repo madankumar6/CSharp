@@ -1,0 +1,4 @@
+G:\Projects\CSharp\LINQ Samples\Partitioning Operators\bin\Debug\Partitioning Operators.exe
+G:\Projects\CSharp\LINQ Samples\Partitioning Operators\bin\Debug\Partitioning Operators.pdb
+G:\Projects\CSharp\LINQ Samples\Partitioning Operators\obj\x86\Debug\Partitioning Operators.exe
+G:\Projects\CSharp\LINQ Samples\Partitioning Operators\obj\x86\Debug\Partitioning Operators.pdb

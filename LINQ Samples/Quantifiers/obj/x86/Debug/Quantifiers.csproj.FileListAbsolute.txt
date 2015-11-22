@@ -1,0 +1,4 @@
+G:\Projects\CSharp\LINQ Samples\Quantifiers\bin\Debug\Quantifiers.exe
+G:\Projects\CSharp\LINQ Samples\Quantifiers\bin\Debug\Quantifiers.pdb
+G:\Projects\CSharp\LINQ Samples\Quantifiers\obj\x86\Debug\Quantifiers.exe
+G:\Projects\CSharp\LINQ Samples\Quantifiers\obj\x86\Debug\Quantifiers.pdb

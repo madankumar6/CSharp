@@ -1,0 +1,5 @@
+G:\Projects\CSharp\LINQ Samples\DataSource\bin\Debug\DataSource.dll
+G:\Projects\CSharp\LINQ Samples\DataSource\bin\Debug\DataSource.pdb
+G:\Projects\CSharp\LINQ Samples\DataSource\obj\Debug\DataSource.csprojResolveAssemblyReference.cache
+G:\Projects\CSharp\LINQ Samples\DataSource\obj\Debug\DataSource.dll
+G:\Projects\CSharp\LINQ Samples\DataSource\obj\Debug\DataSource.pdb

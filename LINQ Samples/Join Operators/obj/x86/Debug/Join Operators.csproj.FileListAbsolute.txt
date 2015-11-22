@@ -1,0 +1,4 @@
+G:\Projects\CSharp\LINQ Samples\Join Operators\bin\Debug\Join Operators.exe
+G:\Projects\CSharp\LINQ Samples\Join Operators\bin\Debug\Join Operators.pdb
+G:\Projects\CSharp\LINQ Samples\Join Operators\obj\x86\Debug\Join Operators.exe
+G:\Projects\CSharp\LINQ Samples\Join Operators\obj\x86\Debug\Join Operators.pdb

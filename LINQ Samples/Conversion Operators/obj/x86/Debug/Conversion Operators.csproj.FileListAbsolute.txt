@@ -1,0 +1,4 @@
+G:\Projects\CSharp\LINQ Samples\Conversion Operators\bin\Debug\Conversion Operators.exe
+G:\Projects\CSharp\LINQ Samples\Conversion Operators\bin\Debug\Conversion Operators.pdb
+G:\Projects\CSharp\LINQ Samples\Conversion Operators\obj\x86\Debug\Conversion Operators.exe
+G:\Projects\CSharp\LINQ Samples\Conversion Operators\obj\x86\Debug\Conversion Operators.pdb

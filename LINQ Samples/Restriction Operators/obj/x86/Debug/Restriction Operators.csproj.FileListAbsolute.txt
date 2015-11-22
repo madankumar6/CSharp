@@ -1,0 +1,7 @@
+G:\Projects\CSharp\LINQ Samples\Restriction Operators\bin\Debug\Restriction Operators.exe
+G:\Projects\CSharp\LINQ Samples\Restriction Operators\bin\Debug\Restriction Operators.pdb
+G:\Projects\CSharp\LINQ Samples\Restriction Operators\bin\Debug\DataSource.dll
+G:\Projects\CSharp\LINQ Samples\Restriction Operators\bin\Debug\DataSource.pdb
+G:\Projects\CSharp\LINQ Samples\Restriction Operators\obj\x86\Debug\Restriction Operators.csprojResolveAssemblyReference.cache
+G:\Projects\CSharp\LINQ Samples\Restriction Operators\obj\x86\Debug\Restriction Operators.exe
+G:\Projects\CSharp\LINQ Samples\Restriction Operators\obj\x86\Debug\Restriction Operators.pdb

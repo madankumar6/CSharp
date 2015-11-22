@@ -1,0 +1,4 @@
+G:\Projects\CSharp\LINQ Samples\Miscellaneous Operators\bin\Debug\Miscellaneous Operators.exe
+G:\Projects\CSharp\LINQ Samples\Miscellaneous Operators\bin\Debug\Miscellaneous Operators.pdb
+G:\Projects\CSharp\LINQ Samples\Miscellaneous Operators\obj\x86\Debug\Miscellaneous Operators.exe
+G:\Projects\CSharp\LINQ Samples\Miscellaneous Operators\obj\x86\Debug\Miscellaneous Operators.pdb

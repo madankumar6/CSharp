@@ -1,0 +1,4 @@
+G:\Projects\CSharp\LINQ Samples\Ordering Operators\bin\Debug\Ordering Operators.exe
+G:\Projects\CSharp\LINQ Samples\Ordering Operators\bin\Debug\Ordering Operators.pdb
+G:\Projects\CSharp\LINQ Samples\Ordering Operators\obj\x86\Debug\Ordering Operators.exe
+G:\Projects\CSharp\LINQ Samples\Ordering Operators\obj\x86\Debug\Ordering Operators.pdb

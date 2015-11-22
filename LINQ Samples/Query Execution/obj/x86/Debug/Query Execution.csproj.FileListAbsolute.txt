@@ -1,0 +1,4 @@
+G:\Projects\CSharp\LINQ Samples\Query Execution\bin\Debug\Query Execution.exe
+G:\Projects\CSharp\LINQ Samples\Query Execution\bin\Debug\Query Execution.pdb
+G:\Projects\CSharp\LINQ Samples\Query Execution\obj\x86\Debug\Query Execution.exe
+G:\Projects\CSharp\LINQ Samples\Query Execution\obj\x86\Debug\Query Execution.pdb

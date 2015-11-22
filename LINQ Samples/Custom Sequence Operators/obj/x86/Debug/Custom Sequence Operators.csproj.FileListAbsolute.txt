@@ -1,0 +1,4 @@
+G:\Projects\CSharp\LINQ Samples\Custom Sequence Operators\bin\Debug\Custom Sequence Operators.exe
+G:\Projects\CSharp\LINQ Samples\Custom Sequence Operators\bin\Debug\Custom Sequence Operators.pdb
+G:\Projects\CSharp\LINQ Samples\Custom Sequence Operators\obj\x86\Debug\Custom Sequence Operators.exe
+G:\Projects\CSharp\LINQ Samples\Custom Sequence Operators\obj\x86\Debug\Custom Sequence Operators.pdb
