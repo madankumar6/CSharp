@@ -77,8 +77,6 @@ namespace Projection_Operators
 
         }
 
-
-
         private static void SelectSimple1()
         {
             Console.WriteLine("This sample uses select to produce a sequence of ints one higher than those in an existing array of ints.");
