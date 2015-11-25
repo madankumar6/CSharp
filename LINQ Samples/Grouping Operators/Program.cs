@@ -16,7 +16,7 @@ namespace Grouping_Operators
 
             do
             {
-                Console.WriteLine("Please choose the Linq Sample \n 0. Exit the Application \n 1. GroupBy - Simple I \n 2. GroupBy - Simple II \n 3. GroupBy - Simple III \n 4. GroupBy - Nested \n 5. GroupBy - Comparer \n 6. GroupBy - Comparer, Mapped \n 7. OrderByDescending - Comparer \n 8. ThenBy - Simple \n 9. ThenBy - Comparer \n 10. ThenByDescending - Simple \n 11. ThenByDescending - Comparer \n 12. Reverse");
+                Console.WriteLine("Please choose the Linq Sample \n 0. Exit the Application \n 1. GroupBy - Simple I \n 2. GroupBy - Simple II \n 3. GroupBy - Simple III \n 4. GroupBy - Nested \n 5. GroupBy - Comparer \n 6. GroupBy - Comparer, Mapped");
                 Console.Write("Enter your choice : ");
                 choice = Convert.ToInt16(Console.ReadLine());
                 switch (choice)
@@ -101,7 +101,7 @@ namespace Grouping_Operators
 
             foreach (var item in orderGroups)
             {
-                Console.WriteLine("Categoey = {0}, Products : ", item.Category);
+                Console.WriteLine("Category = {0}, Products : ", item.Category);
 
                 foreach (var productInfo in item.Products)
                 {
@@ -163,17 +163,43 @@ namespace Grouping_Operators
         private static void GroupByComparer()
         {
             Console.WriteLine("This sample uses GroupBy to partition trimmed elements of an array using a custom comparer that matches words that are anagrams of each other.");
-            
-            string[] anagrams = { "from   ", " salt", " earn ", "  last   ", " near ", " form  " };
+
+            string[] anagrams = { "form   ", " salt", " earn ", "  last   ", " near ", " from  " };
 
             var orderGroups = anagrams.GroupBy(word => word.Trim(), new AnagramEqualityComparer());
 
             Console.WriteLine("Anagrams");
+
+            foreach (var item in orderGroups)
+            {
+                Console.WriteLine("Key = {0} and Anagram Words are", item.Key);
+
+                foreach (var anagramWord in item)
+                {
+                    Console.WriteLine(anagramWord);
+                }
+            }
         }
 
         private static void GroupByComparerMapped()
         {
-            Console.WriteLine("");
+            Console.WriteLine("This sample uses GroupBy to partition trimmed elements of an array using a custom comparer that matches words that are anagrams of each other, and then converts the results to uppercase.");
+
+            string[] anagrams = { "from   ", " salt", " earn ", "  last   ", " near ", " form  " }; 
+
+            var orderGroups = anagrams.GroupBy(word => word.Trim(), word => word.ToUpper(), new AnagramEqualityComparer());
+
+            Console.WriteLine("Anagrams");
+
+            foreach (var item in orderGroups)
+            {
+                Console.WriteLine("Key = {0} and Anagram Words are", item.Key);
+
+                foreach (var anagramWord in item)
+                {
+                    Console.WriteLine(anagramWord);
+                }
+            }
         }
     }
 
