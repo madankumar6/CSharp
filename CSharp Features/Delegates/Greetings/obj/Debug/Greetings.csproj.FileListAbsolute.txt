@@ -1,5 +1,0 @@
-D:\Madankumar\Projects\CSharp\CSharp Features\Delegates\Greetings\bin\Debug\Greetings.exe.config
-D:\Madankumar\Projects\CSharp\CSharp Features\Delegates\Greetings\bin\Debug\Greetings.exe
-D:\Madankumar\Projects\CSharp\CSharp Features\Delegates\Greetings\bin\Debug\Greetings.pdb
-D:\Madankumar\Projects\CSharp\CSharp Features\Delegates\Greetings\obj\Debug\Greetings.exe
-D:\Madankumar\Projects\CSharp\CSharp Features\Delegates\Greetings\obj\Debug\Greetings.pdb

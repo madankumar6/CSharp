@@ -1,5 +1,0 @@
-D:\Madankumar\Projects\CSharp\CSharp Features\DataSource\bin\Debug\DataSource.dll
-D:\Madankumar\Projects\CSharp\CSharp Features\DataSource\bin\Debug\DataSource.pdb
-D:\Madankumar\Projects\CSharp\CSharp Features\DataSource\obj\Debug\DataSource.csprojResolveAssemblyReference.cache
-D:\Madankumar\Projects\CSharp\CSharp Features\DataSource\obj\Debug\DataSource.dll
-D:\Madankumar\Projects\CSharp\CSharp Features\DataSource\obj\Debug\DataSource.pdb
