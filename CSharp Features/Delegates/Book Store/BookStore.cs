@@ -67,7 +67,7 @@ namespace BookStore
 
         internal decimal AveragePrice()
         {
-            return priceBooks/countBooks;
+            return priceBooks / countBooks;
         }
     }
 }

@@ -29,7 +29,7 @@ namespace BookStore
             // Create a new delegate object associated with the nonstatic method AddBookToTotal on the object totaller:
             bookDB.ProcessPaperbackBooks(new ProcessBookDelegate(totaller.AddBookToTotal));
 
-            Console.WriteLine("Average Paperback Book Price: ${0:#.##}",totaller.AveragePrice());
+            Console.WriteLine("Average Paperback Book Price: ${0:#.##}", totaller.AveragePrice());
             Console.Read();
         }
 

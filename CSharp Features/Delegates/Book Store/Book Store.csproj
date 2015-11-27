@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{30FD1799-713F-469D-9EAD-504217BFAF44}</ProjectGuid>
+    <ProjectGuid>{2C94FF70-3EE0-417D-A0B6-06CF18AD0348}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BookStore</RootNamespace>
-    <AssemblyName>BookStore</AssemblyName>
+    <RootNamespace>Book_Store</RootNamespace>
+    <AssemblyName>Book Store</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
