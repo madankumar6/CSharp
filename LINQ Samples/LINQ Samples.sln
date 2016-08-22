@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSource", "DataSource\DataSource.csproj", "{9B424B78-A77D-4489-A015-4C3CA0AF1EAA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restriction Operators", "Restriction Operators\Restriction Operators.csproj", "{07BD3440-F85F-4F3C-8F5D-0FCB6918D0E8}"
@@ -32,6 +34,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generation Operators", "Generation Operators\Generation Operators.csproj", "{EE285EB1-607C-4B7C-A963-ED06A38C701B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Custom Sequence Operators", "Custom Sequence Operators\Custom Sequence Operators.csproj", "{0771EF96-BE99-4A72-BAE0-D38F19475E4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Temp", "Temp\Temp.csproj", "{B707A1B0-1BE6-4B3A-A2EC-795F017B879A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -203,6 +207,18 @@ Global
 		{0771EF96-BE99-4A72-BAE0-D38F19475E4C}.Release|Mixed Platforms.Build.0 = Release|x86
 		{0771EF96-BE99-4A72-BAE0-D38F19475E4C}.Release|x86.ActiveCfg = Release|x86
 		{0771EF96-BE99-4A72-BAE0-D38F19475E4C}.Release|x86.Build.0 = Release|x86
+		{B707A1B0-1BE6-4B3A-A2EC-795F017B879A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B707A1B0-1BE6-4B3A-A2EC-795F017B879A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B707A1B0-1BE6-4B3A-A2EC-795F017B879A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B707A1B0-1BE6-4B3A-A2EC-795F017B879A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B707A1B0-1BE6-4B3A-A2EC-795F017B879A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B707A1B0-1BE6-4B3A-A2EC-795F017B879A}.Debug|x86.Build.0 = Debug|Any CPU
+		{B707A1B0-1BE6-4B3A-A2EC-795F017B879A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B707A1B0-1BE6-4B3A-A2EC-795F017B879A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B707A1B0-1BE6-4B3A-A2EC-795F017B879A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B707A1B0-1BE6-4B3A-A2EC-795F017B879A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B707A1B0-1BE6-4B3A-A2EC-795F017B879A}.Release|x86.ActiveCfg = Release|Any CPU
+		{B707A1B0-1BE6-4B3A-A2EC-795F017B879A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
