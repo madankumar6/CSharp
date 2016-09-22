@@ -1,0 +1,42 @@
+﻿@model TMS.Web.Models.ViewModels.ReportViewModel
+@{
+    ViewBag.Title = "Summary Report";
+    Layout = "~/Views/Shared/_LayoutLTE.cshtml";
+}
+
+<h2>Summary</h2>
+
+<form method="post">
+    @Html.TextBoxFor(m => m.Parameter.StartDate)
+    @Html.TextBoxFor(m => m.Parameter.EndDate)
+    <input type="submit" value="Get Report" />
+</form>
+
+@if (Model.Results != null)
+{
+    <h2>Result</h2>
+    <table class="table table-bordered">
+        <tr>
+            <th>SNo</th>
+            <th>StartDate</th>
+            <th>EndDate</th>
+            <th>Ignition</th>
+            <th>Position</th>
+        </tr>
+        @foreach (var row in Model.Results)
+        {
+            <tr>
+                <td>@row.SNo</td>
+                <td>@row.StartDate</td>
+                <td>@row.EndDate</td>
+                <td>@row.OnAccStr</td>
+                <td>@(row.Lat + "," + row.Lang)</td>
+            </tr>
+        }
+    </table>
+
+}
+
+<script type="text/javascript">
+    $("#StartDate").datepicker();
+</script>

@@ -1,0 +1,157 @@
+﻿@model TMS.Web.Models.ViewModels.ReportViewModel
+
+
+<h2>Speed Report</h2>
+<form method="post">
+    <div>
+        @Html.LabelFor(m => m.Parameter.DeviceId)
+        @Html.DropDownListFor(m => m.Parameter.DeviceId,new SelectList(Model.Parameter.DeviceList,"Value","Text"), new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Parameter.StartDate)
+        @Html.TextBoxFor(m => m.Parameter.StartDate, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Parameter.EndDate)
+        @Html.TextBoxFor(m => m.Parameter.EndDate, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Parameter.Speed)
+        @Html.TextBoxFor(m => m.Parameter.Speed, new { @class = "form-control col-md-2", @placeholder = " ", @required = "true" })
+    </div>
+
+    <button type="button" value="Get Report"/>
+</form>
+
+<table id="report" class="table table-bordered">
+
+    @if (Model.Results != null)
+    {
+        <tr>
+            <th>DeviceId</th>
+            <th>Speed</th>
+            <th>Latitude</th>
+            <th>Langitude</th>
+            <th>DeviceDataTime</th>
+            <th>Place</th>
+        </tr>
+        for (int i = 0; i < Model.Results.Count; i++)
+        {
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.Results[i].DeviceId)
+                </td>
+                <td>@Html.LabelFor(m => m.Results[i].Speed)</td>
+                <td>
+                    @Html.TextBoxFor(m => m.Results[i].Lat)
+                @*@row.Lat*@
+            </td>
+            <td>
+                @Html.TextBoxFor(m => m.Results[i].Lang)
+                @*@row.Lang*@
+            </td>
+            <td>@Html.LabelFor(m => m.Results[i].DeviceDataTime)</td>
+
+        </tr>
+        }
+    }</table>
+   
+<div>
+    <style>
+            #map {
+                height: 100%;
+            }
+
+            #floating-panel {
+                position: absolute;
+                top: 1000px;
+                left: 25%;
+                z-index: 5;
+                background-color: #fff;
+                padding: 5px;
+                border: 1px solid #999;
+                text-align: center;
+                font-family: 'Roboto','sans-serif';
+                line-height: 30px;
+                padding-left: 10px;
+            }
+
+            #floating-panel {
+                position: absolute;
+                top: 499px;
+                left: 50%;
+                margin-left: -180px;
+                width: 350px;
+                z-index: 5;
+                background-color: #fff;
+                padding: 5px;
+                border: 1px solid #999;
+            }
+
+            #latlng {
+                width: 225px;
+            }
+        </style>
+    
+        <div id="floating-panel">
+            <input id="latlng" type="text" value="40.714224,-73.961452">
+            <input id="locate" type="text" value="" />
+
+            <input id="submit" type="button" value="Reverse Geocode">
+        </div>
+        <div id="map"></div>
+        <script>
+      function initMap() {
+          var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 8,
+              center: { lat: 40.731, lng: -73.997 }
+          });
+          var geocoder = new google.maps.Geocoder;
+          var infowindow = new google.maps.InfoWindow;
+          var locate;
+          var table;
+
+          document.getElementById('submit').addEventListener('click', function() {
+                      geocodeLatLng(geocoder, map, infowindow, locate);            
+          });
+          }
+
+      function geocodeLatLng(geocoder, map, infowindow, locate) {
+          //var lat = document.getElementById('Lat');
+          //var lang = document.getElementById('Lang');
+          //var input = lat + "," + lang;
+          var input = document.getElementById('latlng');
+          console.log(input);
+        var latlngStr = input.split(',', 2);
+        var latlng = { lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1]) };
+        //console.log(latlng);
+        geocoder.geocode({ 'location': latlng }, function (results, status) {
+            if (status === 'OK') {
+                if (results[1]) {
+                    map.setZoom(11);
+                    console.log(results[1]);
+                    var marker = new google.maps.Marker({
+                        position: latlng,
+                        map: map
+                    });
+
+                    window.alert(results[1].formatted_address);
+                    locate = results[1].formatted_address;
+                    console.log(locate);
+                    document.getElementById('locate').value = locate;
+                    //infowindow.setContent(results[1].formatted_address);
+                    //infowindow.open(map, marker);
+            } else {
+              window.alert('No results found');
+            }
+          } else {
+            window.alert('Geocoder failed due to: ' + status);
+          }
+        });
+      }
+        </script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+        <script async defer
+                 src="https://maps.google.com/maps/api/js?key=AIzaSyBWUc0EJoamD0c5KFiXjdvrcSj-8qfFwDo&callback=initMap" ></script>        
+</div>

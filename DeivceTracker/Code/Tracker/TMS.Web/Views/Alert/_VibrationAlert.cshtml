@@ -1,0 +1,110 @@
+﻿@model List<TMS.Web.Models.ViewModels.AlertBase>
+@{
+    Layout = null;
+}
+@{
+    <table id="VibrationAlert">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            {
+                <tr>
+                    <td>
+                        @Html.HiddenFor(m => m[i].Id)
+                        @if (Model[i].Conditions != null)
+                        {
+                            for (int j = 0; j < Model[i].Conditions.Count; j++)
+                            {
+                                @Model[i].Conditions[j].Operand
+
+                                @Html.HiddenFor(m => m[i].Conditions[j].Operand)
+                                @*@Html.HiddenFor(m => m[i].Conditions[j].Conjunction)*@
+
+                                @Html.EditorFor(m => m[i].Conditions[j].Operator)
+                                @Html.EditorFor(m => m[i].Conditions[j].Value)
+
+                                @*@Model[i].Conditions[j].Conjunction.ToString()*@
+                            }
+                        }
+                    </td>
+                    <td>
+                        @Html.EditorFor(m => m[i].IsActive)
+                    </td>
+                    <td>
+                        @Html.HiddenFor(m => m[i].IsToDelete)
+                        <input type="button" value="Delete" onclick="VibrationAlertToDelete(this)" />
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" value="Add New" onclick="AddVibrationAlertUI()" class="btn btn-default" />
+        </div>
+    </div>
+    <script>
+        function AddVibrationAlertUI() {
+            var AlerReceivers = $("table#VibrationAlert");
+            var incVal = AlerReceivers.find("tr").length;
+            console.log(incVal);
+            var tr = $("<tr/>").appendTo(AlerReceivers);
+            var td1 = $("<td/>", {
+                //class: "form-group",
+            }).appendTo(tr);
+
+            $("<span/>", {
+                class: "form-control",
+                type: "text",
+                text: "Vibration"
+            }).appendTo(td1);
+
+            var input1 = $("<input/>", {
+                class: "form-control",
+                type: "text",
+                name: "[" + incVal + "].Conditions[0].Operator",
+                value: ">"
+            }).appendTo(td1);
+
+            $("<input/>", {
+                class: "form-control",
+                type: "text",
+                name: "[" + incVal + "].Conditions[0].Value",
+                value: 1
+            }).appendTo(td1);
+
+            var td2 = $("<td/>", {
+            }).appendTo(tr);
+
+            $("<input/>", {
+                class: "form-control",
+                type: "checkbox",
+                name: "[" + incVal + "].IsActive",
+                checked: true,
+                value: true
+            }).appendTo(td2);
+
+
+
+            var td3 = $("<td/>", {
+            }).appendTo(tr);
+            $("<input/>", {
+                type: "button",
+                name: "[" + incVal + "].IsToDelete",
+                onclick: "VibrationAlertToDelete(this)",
+                value: "Delete"
+            }).appendTo(td3);
+            AlerReceivers.show();
+        }
+        function VibrationAlertToDelete(ele) {
+            var IsToDeleteEle = $(ele).parent().children("input[type='hidden']");
+            if (IsToDeleteEle.length > 0) {
+                IsToDeleteEle.val(true);
+                $(ele).parent().append($("<span/>", { text: "Will be deleted on Save" }));
+                $(ele).remove();
+            } else {
+                $(ele).parents("tr").remove();
+            }
+        }
+    </script>
+} 

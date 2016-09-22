@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_GoogleMapLayout.cshtml";
+}
+
+<div ng-app="Tracker" ng-controller="mapCtrl">
+    <ui-gmap-google-map center='map.center' zoom='map.zoom' style="">
+        <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+        </ui-gmap-marker>
+    </ui-gmap-google-map>
+</div>
+

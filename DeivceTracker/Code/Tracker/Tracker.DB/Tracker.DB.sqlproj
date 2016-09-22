@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Tracker.DB</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{4e005396-b972-4a07-8924-5f125c628c85}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql100DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>Tracker.DB</RootNamespace>
+    <AssemblyName>Tracker.DB</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- VS10 without SP1 will not have VisualStudioVersion set, so do that here -->
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="dbo\User Defined Types\" />
+    <Folder Include="dbo\Functions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\ProtocolServer.sql" />
+    <Build Include="dbo\Stored Procedures\T_StoreProtocolServer.sql" />
+    <Build Include="dbo\Tables\DeviceData_History.sql" />
+    <Build Include="dbo\Tables\DeviceData.sql" />
+    <Build Include="dbo\Tables\DeviceAlertData.sql" />
+    <Build Include="dbo\Stored Procedures\T_StoreDeviceData.sql" />
+    <Build Include="dbo\Tables\UnknownDeviceData.sql" />
+    <Build Include="dbo\Stored Procedures\T_StoreUnknownDevice.sql" />
+    <Build Include="dbo\Stored Procedures\T_StoreNumOfDevicesConnected.sql" />
+    <Build Include="dbo\Stored Procedures\T_GetActiveDevices.sql" />
+    <Build Include="dbo\Stored Procedures\T_GetDeviceData.sql" />
+    <Build Include="dbo\Tables\DeviceAlerts.sql" />
+    <Build Include="dbo\Stored Procedures\Master_SaveDeviceAlert.sql" />
+    <Build Include="dbo\Stored Procedures\Master_GetDeviceAlert.sql" />
+    <Build Include="dbo\Tables\DeviceAlertReceivers.sql" />
+    <Build Include="dbo\Stored Procedures\Master_SaveDeviceAlertReceivers.sql" />
+    <Build Include="dbo\Stored Procedures\Master_GetDeviceAlertReceivers.sql" />
+    <Build Include="dbo\Tables\DeviceFiredAlerts.sql" />
+    <Build Include="dbo\Tables\DeviceAlertLog.sql" />
+    <Build Include="dbo\Tables\DeviceAlertData_Prev.sql" />
+    <Build Include="dbo\Stored Procedures\A_StoreDevicesNAlerts.sql" />
+    <Build Include="dbo\Stored Procedures\A_StoreDeviceFiredAlerts.sql" />
+    <Build Include="dbo\Stored Procedures\A_GetDevicesNAlerts.sql" />
+    <Build Include="dbo\User Defined Types\DeviceAlertDataType.sql" />
+    <Build Include="dbo\Tables\AlertEmailLog.sql" />
+    <Build Include="dbo\Stored Procedures\A_UpdateFiredAlerts.sql" />
+    <Build Include="dbo\Stored Procedures\A_StoreEmailLog.sql" />
+    <Build Include="dbo\Stored Procedures\A_GetFiredAlerts.sql" />
+    <Build Include="dbo\Stored Procedures\A_GetFiredAlertReceivers.sql" />
+    <Build Include="dbo\User Defined Types\DeviceAlertDataType_V1.sql" />
+    <Build Include="dbo\Stored Procedures\Api_GetDeviceList.sql" />
+    <Build Include="dbo\Stored Procedures\Api_GetDeviceCurrentData.sql" />
+    <Build Include="dbo\Functions\fnc_Split.sql" />
+    <Build Include="dbo\Stored Procedures\Master_GetActiveDevices.sql" />
+    <Build Include="dbo\Tables\DeviceAlertFenceData.sql" />
+    <Build Include="dbo\Stored Procedures\A_GetFenceList.sql" />
+    <Build Include="dbo\Stored Procedures\Master_SaveFenceList.sql" />
+    <Build Include="dbo\Stored Procedures\Master_GetFenceList.sql" />
+    <Build Include="dbo\User Defined Types\CustomDataType.sql" />
+    <Build Include="dbo\Tables\DeviceCalcData.sql" />
+    <Build Include="dbo\Stored Procedures\T_Sub_StoreDeviceCalcData.sql" />
+    <Build Include="dbo\Stored Procedures\T_StoreDeviceStatus.sql" />
+    <Build Include="dbo\Stored Procedures\Master_GetAvailableAlerts.sql" />
+    <Build Include="dbo\Tables\AlertDevices.sql" />
+    <Build Include="dbo\Stored Procedures\Master_SaveDevicesForAlert.sql" />
+    <Build Include="dbo\Stored Procedures\Master_GetDevicesForAlert.sql" />
+    <Build Include="dbo\Stored Procedures\A_StoreCustomerNotificationCount.sql" />
+    <Build Include="dbo\Stored Procedures\A_GetCustomerDetail.sql" />
+    <Build Include="dbo\Stored Procedures\Report_Ignition.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SpeedReport.sql" />
+    <Build Include="dbo\Stored Procedures\Report_ProtocolServers.sql" />
+    <Build Include="dbo\Stored Procedures\Report_ProtocolServer.sql" />
+    <Build Include="dbo\Stored Procedures\Report_Parking.sql" />
+    <Build Include="dbo\Stored Procedures\Master_SaveDeviceSettings.sql" />
+    <Build Include="dbo\Stored Procedures\Master_GetDeviceSettings.sql" />
+    <Build Include="dbo\Stored Procedures\Report_SummaryReport.sql" />
+    <Build Include="dbo\Stored Procedures\Report_DailyTravelled.sql" />
+  </ItemGroup>
+</Project>

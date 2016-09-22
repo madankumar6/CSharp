@@ -1,0 +1,66 @@
+﻿@model TMS.Web.Models.ViewModels.ScheduleViewModel
+
+@{
+    ViewBag.Title = "Schedule";
+    //Layout = "~/Views/Shared/_LayoutLTE.cshtml";
+    Layout = null;
+}
+@using (Ajax.BeginForm("SaveAlert", new AjaxOptions
+{
+    UpdateTargetId = "AlertScheduleAjaxUpdateId",
+    InsertionMode = InsertionMode.Replace,
+    HttpMethod = "POST",
+    OnSuccess = "toastr.success('Saved successfully');"
+}))
+{
+    {
+        if (Model != null && Model.SelectedDevice != "0")
+        {
+            @Html.HiddenFor(m => m.SelectedAlertType)
+            @Html.HiddenFor(m => m.SelectedDevice)
+
+            if (Model.AlertDatas != null)
+            {
+                switch (Model.SelectedAlertType)
+                {
+                    case Tracker.Common.Model.DeviceAlarmType.PowerCutAlarm:
+                        Html.RenderPartial("_PowerCutAlert", Utils.Extensions.ToObjList<TMS.Web.Models.ViewModels.AlertBase>(Model.AlertDatas));
+                        break;
+                    case Tracker.Common.Model.DeviceAlarmType.SOSAlarm:
+                        Html.RenderPartial("_SOSAlert", Utils.Extensions.ToObjList<TMS.Web.Models.ViewModels.AlertBase>(Model.AlertDatas));
+                        break;
+                    case Tracker.Common.Model.DeviceAlarmType.SpeedAlarm:
+                        Html.RenderPartial("_SpeedAlert", Utils.Extensions.ToObjList<TMS.Web.Models.ViewModels.AlertBase>(Model.AlertDatas));
+                        break;
+                    //case Tracker.Common.Model.DeviceAlarmType.BreakAlarm:
+                    //    Html.RenderPartial("_BreakAlert", Model);
+                    //    break;
+                    case Tracker.Common.Model.DeviceAlarmType.VibrationAlarm:
+                        Html.RenderPartial("_VibrationAlert", Utils.Extensions.ToObjList<TMS.Web.Models.ViewModels.AlertBase>(Model.AlertDatas));
+                        break;
+                    case Tracker.Common.Model.DeviceAlarmType.FenceAlarm:
+                    case Tracker.Common.Model.DeviceAlarmType.FenceInAlarm:
+                    case Tracker.Common.Model.DeviceAlarmType.FenceOutAlarm:
+                        Html.RenderPartial("_FenceAlert", Utils.Extensions.ToObjList<TMS.Web.Models.ViewModels.AlertBase>(Model.AlertDatas));
+                        break;
+                    case Tracker.Common.Model.DeviceAlarmType.MovingAlarm:
+                        Html.RenderPartial("_MovingAlert", Utils.Extensions.ToObjList<TMS.Web.Models.ViewModels.AlertBase>(Model.AlertDatas));
+                        break;
+                    case Tracker.Common.Model.DeviceAlarmType.AccAlarm:
+                        Html.RenderPartial("_AccAlert", Utils.Extensions.ToObjList<TMS.Web.Models.ViewModels.AlertBase>(Model.AlertDatas));
+                        break;
+                    case Tracker.Common.Model.DeviceAlarmType.StopAlarm:
+                        Html.RenderPartial("_StopAlert", Utils.Extensions.ToObjList<TMS.Web.Models.ViewModels.AlertBase>(Model.AlertDatas));
+                        break;
+                    default:
+                        break;
+                }
+                @*@Html.EditorFor(m=>m.IsActive)*@
+                <button class="btn btn-primary" type="submit" style="float: right;">
+                    <i class="fa fa-save"></i> &nbsp; Save Alert
+                </button>
+            }
+
+        }
+    }
+}

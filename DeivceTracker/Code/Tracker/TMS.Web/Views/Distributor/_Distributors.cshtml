@@ -1,0 +1,18 @@
+﻿@model IEnumerable<TMS.Web.Models.ViewModels.DistributorViewModel>
+
+<table id="DistributorTable" class="table table-striped table-bordered dt-responsive nowrap display select" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th><input type="checkbox"></th>
+            <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+            <th>@Html.DisplayNameFor(model => model.LastName)</th>
+            <th>@Html.DisplayNameFor(model => model.Username)</th>
+            <th>@Html.DisplayNameFor(model => model.PhoneNo)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+        </tr>
+    </thead>
+</table>
+<div>
+    <input type="submit" name="btnExportLicensing" style="width: 140px;"
+           value="Export" id="exportLicensing" class="button" />
+</div>

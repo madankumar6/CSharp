@@ -1,0 +1,149 @@
+﻿@using TMS.Model
+@model TMS.Web.Models.ViewModels.DealerViewModel
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="">
+
+            @using (Html.BeginForm("Edit", "Dealer", FormMethod.Post, new { id = "EditDealerForm", @role = "form", enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="box-body">
+                    @Html.HiddenFor(m => m.UserId)
+                    <table style="width: 100%; vertical-align: top;">
+                        <tr>
+                            <td style="vertical-align: top; padding-right: 10px;">
+                                <div class="form-group">
+                                    @Html.Label("Dealer Code")
+                                    @Html.TextBoxFor(m => m.Username, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.FirstName)
+                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.LastName)
+                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Email)
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.PhoneNo)
+                                    @Html.TextBoxFor(m => m.PhoneNo, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+                                </div>
+                            </td>
+                            <td style="vertical-align: top; padding-left: 10px;">
+
+                                <div class="form-group">
+                                    @{
+                                        @Html.Label("Distributor")
+                                        if (Session["UserData"] is Admin)
+                                        {
+                                            @Html.DropDownListFor(m => m.Parent, ViewData["DistributorList"] as SelectList, "Select a Distributor", new { @class = "form-control" })
+                                        }
+                                    }
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Address.AddressLine1)
+                                    @Html.TextBoxFor(m => m.Address.AddressLine1, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Address.AddressLine2)
+                                    @Html.TextBoxFor(m => m.Address.AddressLine2, new { @class = "form-control col-md-6", @placeholder = " ", @required = "false" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Address.AddressLine3)
+                                    @Html.TextBoxFor(m => m.Address.AddressLine3, new { @class = "form-control col-md-6", @placeholder = " ", @required = "false" })
+                                </div>
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <td style="vertical-align: top; padding-right: 10px;">
+                                            <div class="form-group">
+                                                @Html.LabelFor(m => m.Address.City)
+                                                @Html.TextBoxFor(m => m.Address.City, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(m => m.Address.Country)
+                                                @Html.TextBoxFor(m => m.Address.Country, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+                                            </div>
+                                        </td>
+                                        <td style="vertical-align: top; padding-left: 10px;">
+                                            <div class="form-group">
+                                                @Html.LabelFor(m => m.Address.State)
+                                                @Html.TextBoxFor(m => m.Address.State, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(m => m.Address.PostalCode)
+                                                @Html.TextBoxFor(m => m.Address.PostalCode, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.WebSite)
+                                    @Html.TextBoxFor(m => m.WebSite, new { @class = "form-control col-md-6", @placeholder = " ", @required = "false" })
+                                </div>
+                                <div class="form-group">
+                                    @*@Html.LabelFor(m => m.Logo)
+                                    @Html.TextBoxFor(m => m.Logo, new { type="file", id = "fileUpload" })
+                                    @Html.ValidationMessage("CustomError")*@
+
+                                   <input type="file" id="fileUpload" name="fileUpload" onchange="fileCheck(this)" multiple />
+                                    @*<div id="image_holder"></div>*@
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    @section Scripts{
+                       @Scripts.Render("~/bundles/jqueryval")
+                    }
+                    @Html.Hidden("Password", new { @value = "tempData" })
+                    @Html.HiddenFor(m => m.RowVersion)
+                </div>
+                                        }
+        </div>
+    </div>
+</div>
+
+@*<script>
+    $("#fileUpload").on('change', function () {
+
+        //Get count of selected files
+        var countFiles = $(this)[0].files.length;
+
+        var imgPath = $(this)[0].value;
+        var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+        var image_holder = $("#image_holder");
+        image_holder.empty();
+
+        if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+            if (typeof (FileReader) != "undefined") {
+
+                //loop for each file selected for uploaded.
+                for (var i = 0; i < countFiles; i++) {
+
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $("<img />", {
+                            "src": e.target.result,
+                            "class": "thumb-image"
+                        }).appendTo(image_holder);
+                    }
+
+                    image_holder.show();
+                    reader.readAsDataURL($(this)[0].files[i]);
+                }
+
+            } else {
+                alert("This browser does not support FileReader.");
+            }
+        } else {
+            alert("Pls select only images");
+        }
+    });
+</script>*@

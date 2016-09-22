@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gps Tracking App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="~/Content/font-family-Lato.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/ionicons.min.css" rel="stylesheet" />
+    <link href="~/Content/AdminLTE.min.css" rel="stylesheet" />
+    <link href="~/Content/_all-skins.min.css" rel="stylesheet" />
+    <link href="~/Content/select.bootstrap.min.css" rel="stylesheet" />
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="#" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>FTS</b></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>Focus</b>Tracking System</span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+            </nav>
+        </header>
+        
+        <div class="content-wrapper" style="margin: 0;">
+            <!-- Main content -->
+            <section class="content">
+                @RenderBody()
+            </section><!-- /.content -->
+        </div><!-- /.content-wrapper -->
+    </div>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

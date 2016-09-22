@@ -1,0 +1,91 @@
+﻿@model TMS.Web.Models.ViewModels.DistributorViewModel
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="">
+            @using (Html.BeginForm("Edit", "Distributor", FormMethod.Post, new { id = "EditDistributorForm", @role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="box-body">
+                    @Html.HiddenFor(m => m.UserId)
+                    @Html.HiddenFor(m => m.Parent)
+                    <table style="width: 100%; vertical-align: top;">
+                        <tr>
+                            <td style="vertical-align: top; padding-right: 10px;">
+                                <div class="form-group">
+                                    @Html.Label("Distributor Code")
+                                    @Html.TextBoxFor(m => m.Username, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.FirstName)
+                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.LastName)
+                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Email)
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.PhoneNo)
+                                    @Html.TextBoxFor(m => m.PhoneNo, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+                                </div>
+                            </td>
+                            <td style="vertical-align: top; padding-left: 10px;">
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Address.AddressLine1)
+                                    @Html.TextBoxFor(m => m.Address.AddressLine1, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Address.AddressLine2)
+                                    @Html.TextBoxFor(m => m.Address.AddressLine2, new { @class = "form-control col-md-6", @placeholder = " ", @required = "false" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Address.AddressLine3)
+                                    @Html.TextBoxFor(m => m.Address.AddressLine3, new { @class = "form-control col-md-6", @placeholder = " ", @required = "false" })
+                                </div>
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <td style="vertical-align: top; padding-right: 10px;">
+                                            <div class="form-group">
+                                                @Html.LabelFor(m => m.Address.City)
+                                                @Html.TextBoxFor(m => m.Address.City, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(m => m.Address.Country)
+                                                @Html.TextBoxFor(m => m.Address.Country, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+                                            </div>
+                                        </td>
+                                        <td style="vertical-align: top; padding-left: 10px;">
+                                            <div class="form-group">
+                                                @Html.LabelFor(m => m.Address.State)
+                                                @Html.TextBoxFor(m => m.Address.State, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(m => m.Address.PostalCode)
+                                                @Html.TextBoxFor(m => m.Address.PostalCode, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.WebSite)
+                                    @Html.TextBoxFor(m => m.WebSite, new { @class = "form-control col-md-6", @placeholder = " ", @required = "false" })
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    @Html.Hidden("Password", new { @value = "tempData" })
+                    @Html.HiddenFor(m => m.RowVersion)
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{52FE3784-22DB-4E44-A582-D909475D6E51}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TMS.BusinessRule</RootNamespace>
+    <AssemblyName>TMS.BusinessRule</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Concretes\AdminService.cs" />
+    <Compile Include="Concretes\CustomerService.cs" />
+    <Compile Include="Concretes\DealerService.cs" />
+    <Compile Include="Concretes\DeviceDataModelService.cs" />
+    <Compile Include="Concretes\DeviceInfoService.cs" />
+    <Compile Include="Concretes\DeviceService.cs" />
+    <Compile Include="Concretes\DeviceTypeService.cs" />
+    <Compile Include="Concretes\DistributorService.cs" />
+    <Compile Include="Concretes\UserService.cs" />
+    <Compile Include="Concretes\VehicleService.cs" />
+    <Compile Include="Interfaces\IAdminService.cs" />
+    <Compile Include="Interfaces\ICustomerService.cs" />
+    <Compile Include="Interfaces\IAlertService.cs" />
+    <Compile Include="Interfaces\IDealerService.cs" />
+    <Compile Include="Interfaces\IDeviceDataModelService.cs" />
+    <Compile Include="Interfaces\IDeviceInfoService.cs" />
+    <Compile Include="Interfaces\IDeviceService.cs" />
+    <Compile Include="Interfaces\IDeviceTypeService.cs" />
+    <Compile Include="Interfaces\IDistributorService.cs" />
+    <Compile Include="Interfaces\IUserService.cs" />
+    <Compile Include="Interfaces\IVehicleService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TMS.DAL\TMS.DAL.csproj">
+      <Project>{8d47d1aa-e751-40ec-81b3-4faf1bea5693}</Project>
+      <Name>TMS.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TMS.Model\TMS.Model.csproj">
+      <Project>{10285ab5-a728-476b-8c31-03eca2e6571d}</Project>
+      <Name>TMS.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tracker.Common\Tracker.Common.csproj">
+      <Project>{342cc9db-3268-4b69-8bb9-4908f6fd1ae1}</Project>
+      <Name>Tracker.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

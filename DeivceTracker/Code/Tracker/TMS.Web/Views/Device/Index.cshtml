@@ -1,0 +1,391 @@
+﻿@model TMS.Web.Models.ViewModels.DeviceViewModel
+@using TMS.Model
+@using TMS.Web.Rules
+
+
+<div class="bs-example container">
+
+    <p>
+        <button id="AddDevice" class="btn btn-primary collapsed" type="button" data-toggle="collapse" data-target="#AddDeviceForm" aria-expanded="false" aria-controls="AddDeviceForm">
+            <i class="fa fa-plus"></i>
+            Add Device
+        </button>
+        <button id="EditDevice" class="btn btn-default collapsed" type="button">
+            <i class="fa fa-pencil"></i>
+            Edit Device
+        </button>
+        <button id="DeleteDevice" class="btn btn-danger collapsed" type="button">
+            <i class="fa fa-remove"></i>
+            Delete Device
+        </button>
+    </p>
+    <div class="collapse" id="AddDeviceForm" aria-expanded="false" style="height: 0px;">
+    </div>
+
+    <!-- Modal for Editing a Dealer -->
+    <div class="modal fade" id="EditDeviceModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add / Edit Device</h4>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="SaveEditedDevice">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@{
+    var currentUser = Session["UserData"] as CustomPrincipalSerializeModel;
+
+    if (Session["UserData"] is Admin)
+    {
+        @Html.Label("Distributor Name")
+        var distributorList = ViewData["DistributorList"] as SelectList;
+        @Html.DropDownList("distributorIdDD", distributorList, new { @class = "form-control" })
+    }
+}
+
+@{
+    var currentUser1 = Session["UserData"] as CustomPrincipalSerializeModel;
+
+    if (Session["UserData"] is Admin)
+    {
+        @Html.Label("Dealer")
+        var distributorList = ViewData["DealerList"] as SelectList;
+        @Html.DropDownList("dealerIdDD", distributorList, new { @class = "form-control" })
+    }
+}
+
+@{
+    var currentUserse = Session["UserData"] as CustomPrincipalSerializeModel;
+
+    if (Session["UserData"] is Admin)
+    {
+        @Html.Label("Customer")
+        var customerList = ViewData["customerList"] as SelectList;
+        @Html.DropDownList("customerIdDD", customerList, new { @class = "form-control" })
+    }
+}
+@{
+    var currentUsers1e = Session["UserData"] as CustomPrincipalSerializeModel;
+
+    if (Session["UserData"] is Admin)
+    {
+        @Html.Label("Vehicle")
+        var customerList = ViewData["VehicleList"] as SelectList;
+        @Html.DropDownList("vehicleIdDD", customerList, new { @class = "form-control" })
+    }
+}
+
+
+<table id="DeviceTable" class="table table-striped table-bordered dt-responsive nowrap display select" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th><input type="checkbox"></th>
+          @*  <th>@Html.DisplayNameFor(model => model.DeviceCode)</th>*@
+            <th>@Html.DisplayNameFor(model => model.ModelNo)</th>
+            <th>@Html.DisplayNameFor(model => model.IMEINo)</th>
+            <th>@Html.DisplayNameFor(model => model.SIMNo)</th>
+            <th>@Html.DisplayNameFor(model => model.NetworkProvider)</th>
+        </tr>
+    </thead>
+</table>
+
+@section scripts
+{
+    <script type="text/javascript">
+        SetupToastr();
+
+        $("#distributorIdDD").change(function () {
+            var dID = $(this).val();
+            $.getJSON("../Device/GetDealer/", { dealerId: dID },
+                   function (data) {
+                       var select = $("#dealerIdDD");
+                       select.empty();
+                       select.append($('<option/>', {
+                           value: 0,
+                           text: "Select a Dealer"
+                       }));
+                       $.each(data, function (index, itemData) {
+                           select.append($('<option/>', {
+                               value: itemData.Value,
+                               text: itemData.Text
+                           }));
+                       });
+                   });
+            //  table.ajax.reload();
+        });
+        $("#dealerIdDD").change(function () {
+            // table.ajax.reload();
+
+            var cID = $(this).val();
+            $.getJSON("../Device/GetCustomer/", { customerId: cID },
+                   function (data) {
+                       var select = $("#customerIdDD");
+                       select.empty();
+                       select.append($('<option/>', {
+                           value: 0,
+                           text: "Select a Customer"
+                       }));
+                       $.each(data, function (index, itemData) {
+                           select.append($('<option/>', {
+                               value: itemData.Value,
+                               text: itemData.Text
+                           }));
+                       });
+                   });
+        });
+        $("#customerIdDD").change(function () {
+
+            var cID = $(this).val();
+            $.getJSON("../Device/GetVehicle/", { vehicleId: cID },
+                   function (data) {
+                       var select = $("#vehicleIdDD");
+                       select.empty();
+                       select.append($('<option/>', {
+                           value: 0,
+                           text: "Select a Vehicle"
+                       }));
+                       $.each(data, function (index, itemData) {
+                           select.append($('<option/>', {
+                               value: itemData.Value,
+                               text: itemData.Text
+                           }));
+                       });
+                   });
+            //  table.ajax.reload();
+        });
+
+        $("#vehicleIdDD").change(function () {
+            table.ajax.reload();
+        });
+        var table;
+
+        $(document).ready(function () {
+            var rowsSelected = [];
+            table = $('#DeviceTable').DataTable({
+                processing: true, //control the processing indicator while data is being loaded
+                serverSide: true, //process data on server-side for performance reasons.
+                info: true, //control table information display field.
+                stateSave: true, //restore table state on page reload.
+                lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
+                ajax: {
+                    "type": "GET",
+                    "url": '@Url.Action("GetDevices", "Device")',
+                    "contentType": 'application/json; charset=utf-8',
+                    "data": function (dt) {
+                        dt.distributorId = $('#customerIdDD :selected').val();
+                    }
+                },
+                columns: [
+                    { "data": null, "orderable": false },
+                    //{ "data": "DeviceCode", "orderable": true },
+                    { "data": "IMEINo", "orderable": false },
+                    { "data": "ModelNo", "orderable": false },
+                    { "data": "SIMNo", "orderable": false },
+                    { "data": "NetworkProvider", "orderable": false },
+                ],
+                columnDefs: [
+                    {
+                        targets: 0,
+                        orderable: false,
+                        searchable: false,
+                        className: 'dt-body-center',
+                        render: function (data, type, full, meta) {
+                            return '<input type="checkbox">';
+                        }
+                    }
+                ],
+                select: {
+                    style: 'multi'
+                },
+                order: 1,
+                rowCallback: function (row, data, dataIndex) {
+                    // Get row ID
+                    var rowId = data[0];
+                    // If row ID is in the list of selected row IDs
+                    if ($.inArray(rowId, rowsSelected) !== -1) {
+                        $(row).find('input[type="checkbox"]').prop('checked', true);
+                        $(row).addClass('selected');
+                    }
+                }
+            });
+
+            // Handle row selection event
+            $('#DeviceTable').on('select.dt deselect.dt', function (e, api, type, items) {
+                if (e.type === 'select') {
+                    $('tr.selected input[type="checkbox"]', api.table().container()).prop('checked', true);
+                } else {
+                    $('tr:not(.selected) input[type="checkbox"]', api.table().container()).prop('checked', false);
+                }
+
+                // Update state of "Select all" control
+                updateDataTableSelectAllCtrl(table);
+            });
+
+            // Handle click on "Select all" control
+            $('#DeviceTable thead').on('click', 'input[type="checkbox"]', function (e) {
+                if (this.checked) {
+                    table.rows({ page: 'current' }).select();
+                } else {
+                    table.rows({ page: 'current' }).deselect();
+                }
+
+                e.stopPropagation();
+            });
+
+            // Handle click on heading containing "Select all" control
+            $('thead', table.table().container()).on('click', 'th:first-child', function (e) {
+                $('input[type="checkbox"]', this).trigger('click');
+            });
+
+            // Handle table draw event
+            $('#DeviceTable').on('draw.dt', function () {
+                // Update state of "Select all" control
+                updateDataTableSelectAllCtrl(table);
+            });
+        });
+
+        $('#AddDevice').click(function () {
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("Edit", "Device")',
+                data: null,
+                success: function (data) {
+                    $('.modal-body').html(data);
+                    $("#EditDeviceModal").modal();
+                    $("#distributorId").change(function () {
+
+                        var dID = $(this).val();
+                        $.getJSON("../Device/GetDealer/", { dealerId: dID },
+                               function (data) {
+                                   var select = $("#dealerId");
+                                   select.empty();
+                                   select.append($('<option/>', {
+                                       value: 0,
+                                       text: "Select a Dealer"
+                                   }));
+                                   $.each(data, function (index, itemData) {
+                                       select.append($('<option/>', {
+                                           value: itemData.Value,
+                                           text: itemData.Text
+                                       }));
+                                   });
+                               });
+                    });
+                    $("#dealerId").change(function () {
+                        var dID = $(this).val();
+                        $.getJSON("../Device/GetCustomer/", { customerId: dID },
+                               function (data) {
+                                   var select = $("#customerId");
+                                   select.empty();
+                                   select.append($('<option/>', {
+                                       value: 0,
+                                       text: "Select a Customer"
+                                   }));
+                                   $.each(data, function (index, itemData) {
+                                       select.append($('<option/>', {
+                                           value: itemData.Value,
+                                           text: itemData.Text
+                                       }));
+                                   });
+                               });
+                    });
+                    $("#customerId").change(function () {
+                        var vID = $(this).val();
+                        $.getJSON("../Device/GetVehicle/", { vehicleId: vID },
+                               function (data) {
+                                   var select = $("#vehicleId");
+                                   select.empty();
+                                   select.append($('<option/>', {
+                                       value: 0,
+                                       text: "Select a Vehicle"
+                                   }));
+                                   $.each(data, function (index, itemData) {
+                                       select.append($('<option/>', {
+                                           value: itemData.Value,
+                                           text: itemData.Text
+                                       }));
+                                   });
+                         });
+                    });
+                }
+            });
+        });
+
+        $("#EditDevice").click(function () {
+            var selectedRows = table.rows({ page: 'current', selected: true });
+            if (selectedRows.count() !== 1) {
+                alert("Please select a row to edit");
+                return;
+            }
+
+            var Device = table.rows({ selected: true }).data()[0]["DeviceId"];
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("Edit", "Device")',
+                data: { 'DeviceId': Device },
+                success: function (data) {
+                    $('.modal-body').html(data);
+                    $("#EditDeviceModal").modal();
+                }
+            });
+        });
+
+        $("#SaveEditedDevice").click(function () {
+            var formData = $("#EditDeviceForm").serialize();
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Edit", "Device")',
+                data: formData,
+                success: function (data) {
+                    if (data.Result === "Success") {
+                        toastr.success("Updated successfully");
+                        table.ajax.reload();
+                        $("#EditDeviceModal").modal('hide');
+                    } else {
+                        $('.modal-body').html(data);
+                    }
+
+                }
+            });
+        });
+
+        $('#DeleteDevice').click(function () {
+            var selectedRows = table.rows({ page: 'current', selected: true });
+            if (selectedRows.count() < 1) {
+                alert("Please select atleast one row");
+                return;
+            }
+            var dealers = new Array();
+            // Iterate over all selected rows
+            table.rows({ selected: true }).every(function (index) {
+                dealers.push(this.data()["DeviceId"]);
+            });
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Delete", "Device")',
+                data: { 'Devices': dealers },
+                datatype: "json",
+                traditional: true,
+                success: function (data) {
+                    if (data.Result === "Success") {
+                        toastr.success("Deleted successfully");
+                        table.ajax.reload();
+                    } else {
+                        toastr.error("Error occured");
+                    }
+                }
+            });
+        });
+    </script>
+}

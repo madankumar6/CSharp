@@ -1,0 +1,78 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{E58A4EC6-D33D-4EB2-8EB0-5A9D6910DC46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alertify", "Alertify\Alertify.csproj", "{3D0CBD24-B8B6-4314-9677-4E9F5516C3C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alertify.Console", "Alertify.Console\Alertify.Console.csproj", "{88A2E079-7875-4265-9517-C32AABBB3E86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracker.Common", "Tracker.Common\Tracker.Common.csproj", "{342CC9DB-3268-4B69-8BB9-4908F6FD1AE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{07551B60-EF4A-4F15-B2E0-072671DE8B6E}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Tracker.DB", "Tracker.DB\Tracker.DB.sqlproj", "{4E005396-B972-4A07-8924-5F125C628C85}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E58A4EC6-D33D-4EB2-8EB0-5A9D6910DC46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E58A4EC6-D33D-4EB2-8EB0-5A9D6910DC46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E58A4EC6-D33D-4EB2-8EB0-5A9D6910DC46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E58A4EC6-D33D-4EB2-8EB0-5A9D6910DC46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D0CBD24-B8B6-4314-9677-4E9F5516C3C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D0CBD24-B8B6-4314-9677-4E9F5516C3C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D0CBD24-B8B6-4314-9677-4E9F5516C3C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D0CBD24-B8B6-4314-9677-4E9F5516C3C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88A2E079-7875-4265-9517-C32AABBB3E86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88A2E079-7875-4265-9517-C32AABBB3E86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88A2E079-7875-4265-9517-C32AABBB3E86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88A2E079-7875-4265-9517-C32AABBB3E86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{342CC9DB-3268-4B69-8BB9-4908F6FD1AE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{342CC9DB-3268-4B69-8BB9-4908F6FD1AE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{342CC9DB-3268-4B69-8BB9-4908F6FD1AE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{342CC9DB-3268-4B69-8BB9-4908F6FD1AE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07551B60-EF4A-4F15-B2E0-072671DE8B6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07551B60-EF4A-4F15-B2E0-072671DE8B6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07551B60-EF4A-4F15-B2E0-072671DE8B6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07551B60-EF4A-4F15-B2E0-072671DE8B6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E005396-B972-4A07-8924-5F125C628C85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E005396-B972-4A07-8924-5F125C628C85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E005396-B972-4A07-8924-5F125C628C85}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{4E005396-B972-4A07-8924-5F125C628C85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E005396-B972-4A07-8924-5F125C628C85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E005396-B972-4A07-8924-5F125C628C85}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://devicetrack.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = DAL\\DAL.csproj
+		SccProjectName1 = DAL
+		SccLocalPath1 = DAL
+		SccProjectUniqueName2 = Utils\\Utils.csproj
+		SccProjectName2 = Utils
+		SccLocalPath2 = Utils
+		SccProjectUniqueName3 = Tracker.Common\\Tracker.Common.csproj
+		SccProjectName3 = Tracker.Common
+		SccLocalPath3 = Tracker.Common
+		SccProjectUniqueName4 = Alertify.Console\\Alertify.Console.csproj
+		SccProjectName4 = Alertify.Console
+		SccLocalPath4 = Alertify.Console
+		SccProjectUniqueName5 = Alertify\\Alertify.csproj
+		SccProjectName5 = Alertify
+		SccLocalPath5 = Alertify
+		SccProjectUniqueName6 = Tracker.DB\\Tracker.DB.sqlproj
+		SccProjectName6 = Tracker.DB
+		SccLocalPath6 = Tracker.DB
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,7 @@
+﻿@model List<TMS.Web.Models.ViewModels.AlertDetail>
+
+@{
+    Layout = null;
+}
+
+@Html.DropDownList("Id", new SelectList(Model, "Id", "Name", Request.Params["IdToShow"]), new { @class = "form-control select2", @onchange = "$('#FenceAlertAjaxForm').submit();" })

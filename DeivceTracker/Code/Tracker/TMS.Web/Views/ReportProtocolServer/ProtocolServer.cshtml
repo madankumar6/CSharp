@@ -1,0 +1,34 @@
+﻿@model List<TMS.Web.Models.ViewModels.ProtocolServerViewModel>
+    @{
+        ViewBag.Title = "ProtocolServer";
+        Layout = "~/Views/Shared/_LayoutLTE.cshtml";
+    }
+
+    <h2>ProtocolServer</h2>
+
+
+    @if (Model != null)
+    {
+        <table class="table table-bordered">
+            <tr>
+                <th>ProtocolServer</th>
+                <th>Port</th>
+                <th>DevicesConnected</th>
+                <th>Action</th>
+                <th>ActionText</th>
+                <th>ActionTime</th>
+            </tr>
+            @foreach (var row in Model)
+            {
+                <tr>
+                    <td>@row.ProtocolServer</td>
+                    <td>@row.Port</td>
+                    <td>@row.DevicesConnected</td>
+                    <td>@row.Action</td>
+                    <td>@row.ActionText</td>
+                    <td>@row.ActionTime</td>
+
+                </tr>
+            }
+        </table>
+    }

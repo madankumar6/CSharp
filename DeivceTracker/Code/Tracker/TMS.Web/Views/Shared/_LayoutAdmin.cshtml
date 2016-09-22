@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @*@Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")*@
+
+    @*<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>*@
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Content/bootstrap.min.css" rel='stylesheet' type='text/css' />
+    <!-- Custom CSS -->
+    <link href="~/Content/style.css" rel='stylesheet' type='text/css' />
+    <!-- Graph CSS -->
+    <link href="~/Content/font-awesome.css" rel="stylesheet">
+    <!-- jQuery -->
+    <!-- lined-icons -->
+    <link rel="stylesheet" href="~/Content/icon-font.min.css" type='text/css' />
+    <!-- //lined-icons -->
+    <!--animate-->
+    <link href="~/Content/animate.css" rel="stylesheet" type="text/css" media="all">
+    <script src="~/Scripts/wow.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.nicescroll.js"></script>
+    <link href="~/Content/family-Cabin.css" rel="stylesheet" />
+    <script>
+            new WOW().init();
+    </script>
+</head>
+<body  class="sticky-header left-side-collapsed">
+    <section>
+        <!-- left side Menus - Start-->
+        <div class="left-side sticky-left-side">
+
+            <!--logo and iconic logo start-->
+            <div class="logo">
+                <h1>
+                    <a href="index.html">TMS <span>Admin</span></a>
+                </h1>
+            </div>
+            <div class="logo-icon text-center">
+                <a href="index.html"><i class="lnr lnr-home"></i> </a>
+            </div>
+            <!--logo and iconic logo end-->
+
+            <!-- Building the menus based on logged-in users role - Start -->
+            <div class="left-side-inner">
+                <!-- sidebar nav start -->
+                <ul class="nav nav-pills nav-stacked custom-nav">
+                    @{
+                        //Html.RenderAction("BuildMenus", "UserAccount");
+
+                        //List<TMS.Model.MenuItem> result = Session["Menus"] as List<TMS.Model.MenuItem>;
+                        List<TMS.Model.MenuItem> result = ViewBag.Menus as List<TMS.Model.MenuItem>;
+                        @Helpers.BuildMenu(result);
+                    }
+                </ul>
+                <!-- sidebar nav end -->
+            </div>
+            <!-- Building the menus based on logged-in users role - End -->
+
+        </div>
+        <!-- left side Menus - End-->
+
+        <!-- main content start-->
+
+        <!-- header-Start -->
+        <div class="main-content">
+            <div class="header-section">
+
+                <!--toggle button start-->
+                <a class="toggle-btn  menu-collapsed"><i class="fa fa-bars"></i></a>
+                <!--toggle button end-->
+                <!--notification menu start -->
+                <!--notification menu end -->
+            </div>
+            <!-- //header-End -->
+            <!-- Content-Start -->
+            <div id="page-wrapper">
+                @RenderBody()
+            </div>
+            <!-- Content-End -->
+            <!--footer section start-->
+            <footer>
+                <p>© 2015 TMS. All Rights Reserved | Design by <a href="http://noobiecode.com/" target="_blank">Noobiecode.</a></p>
+            </footer>
+            <!--footer section start-->
+        </div>
+        <!-- main content end-->
+
+    </section>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/scripts.js"></script>
+
+    @*@RenderSection("scripts", required: false)*@
+</body>
+</html>

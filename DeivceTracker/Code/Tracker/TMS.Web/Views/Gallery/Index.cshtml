@@ -1,0 +1,42 @@
+﻿@model List<TMS.Web.Models.ViewModels.DealerViewModel>
+@using TMS.Model
+
+<div>
+   @Html.Label("Dealer Gallery")
+</div>
+<br />
+    <div> 
+        <table width="100%">
+
+    @*foreach (var item in Model)*@
+
+    @{
+        int j = 0;
+        for (int i = 0; i < Model.Count(); i+=4)
+        {
+          
+                <tr>
+                    @while (j < i+4 && j < Model.Count())
+                    {
+
+                        byte[] photo = Model[j].Logo;
+                        string imageSrc = null;
+                        if (photo != null)
+                        {
+                            string imageBase64 = Convert.ToBase64String(photo.ToArray());
+                            imageSrc = string.Format("data:image/jpg;base64,{0}", imageBase64);
+                        }
+                        <td>
+                            <img src="@imageSrc" alt="Image" style="height:250px; width:250px;" />&nbsp;<br />
+                            &nbsp; @Html.DisplayFor(deal => Model[j].Username)<br />
+                            <br />
+                        </td>
+                        j++;
+                    }
+                </tr>
+            }
+        }
+    
+         </table>
+
+    </div>

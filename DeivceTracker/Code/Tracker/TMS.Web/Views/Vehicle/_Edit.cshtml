@@ -1,0 +1,120 @@
+﻿@using TMS.Model
+@model TMS.Web.Models.ViewModels.VehicleViewModel
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="">
+
+            @using (Html.BeginForm("Edit", "Vehicle", FormMethod.Post, new { id = "EditVehicleForm", @role = "form", enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="box-body">
+                    @Html.HiddenFor(m => m.VehicleId)
+                    @Html.HiddenFor(m => m.CustomerId)
+                    <table style="width: 100%; vertical-align: top;">
+                        <tr>
+                            <td style="vertical-align: top; padding-right: 10px;">
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.VehicleNo)
+                                    @Html.TextBoxFor(m => m.VehicleNo, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Model)
+                                    @Html.TextBoxFor(m => m.Model, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Make)
+                                    @Html.TextBoxFor(m => m.Make, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Type)
+                                    @Html.TextBoxFor(m => m.Type, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+                                </div>
+                            </td>
+                            <td style="vertical-align: top; padding-left: 10px;">
+                                <div class="form-group">
+                                    @{
+                                        @Html.Label("Distributor")
+                                        if (Session["UserData"] is Admin)
+                                        {
+                                            var distributorList = ViewData["DistributorList"] as SelectList;
+                                            @Html.DropDownList("distributorId", distributorList, new { @class = "form-control col-md-6" })
+                                        }
+                                    }
+                                </div>
+                                <div class="form-group">
+                                    @{
+                                        @Html.Label("Dealer")
+                                        if (Session["UserData"] is Admin)
+                                        {
+                                            var dealerList = ViewData["DealerList"] as SelectList;
+                                            @Html.DropDownList("dealerId", dealerList, new { @class = "form-control col-md-6" })
+                                        }
+                                    }
+                                </div>
+                                <div class="form-group">
+                                    @{
+                                        @Html.Label("Customer")
+                                        if (Session["UserData"] is Admin)
+                                        {
+                                            var customerList = ViewData["CustomerList"] as SelectList;
+                                            @Html.DropDownList("custId", customerList, new { @class = "form-control col-md-6" })
+                                        }
+                                    }
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.ImageName)
+                                    <input type="file" id="fileUpload" name="fileUpload" onchange="fileCheck(this);" multiple />
+                                   @*<div id="image_holder" style="width:20px; height:20px;"></div>*@
+                                </div>
+                                <div class="form-group" style="visibility:hidden">
+                                    @Html.Label("Status")
+                                    @Html.CheckBoxFor(m => m.Status)
+                                </div>
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                                        }
+        </div>
+    </div>
+</div>
+<script>
+    $("#fileUpload").on('change', function () {
+
+        //Get count of selected files
+        var countFiles = $(this)[0].files.length;
+
+        var imgPath = $(this)[0].value;
+        var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+       
+        if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+            if (typeof (FileReader) != "undefined") {
+
+                //loop for each file selected for uploaded.
+                for (var i = 0; i < countFiles; i++) {
+
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $("<img />", {
+                            "src": e.target.result,
+                            "class": "thumb-image"
+                        });
+                    }
+
+                   
+                    reader.readAsDataURL($(this)[0].files[i]);
+                }
+
+            } else {
+                alert("This browser does not support FileReader.");
+            }
+        } else {
+            alert("Pls select only images");
+        }
+    });
+</script>

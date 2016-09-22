@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracker</title>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+    <script src="~/Scripts/Angular/lodash-4.0.0.js"></script>
+
+    @*<script src="~/Scripts/Angular/lodash.core.js"></script>*@
+    <script src="~/Scripts/Angular/angular.min.js"></script>
+    <script src="~/Scripts/Angular/angular-simple-logger.min.js"></script>
+    <script src="~/Scripts/Angular/angular-google-maps.min.js"></script>
+    <script src='//maps.googleapis.com/maps/api/js'></script>
+
+    <script src="~/Scripts/Custom/App.js"></script>
+
+    <style type="text/css">
+        .angular-google-map-container { height: 400px; }
+    </style>
+    <script type="text/javascript">
+        @*var ApiUrl = "@Url.Action("GetCurrentPosition", "Device")";*@
+        var ApiUrl = "/Device/";
+    </script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year</p>
+        </footer>
+    </div>
+    <script type="text/javascript">
+        
+        function setElementSize() {
+            $(".angular-google-map-container, .height-adjust").css("height", window.screen.height);
+        }
+
+        $(document).ready(function () {
+            setElementSize();
+        });
+
+        $(document).resize(function () {
+            setElementSize
+        });
+
+    </script>
+</body>
+</html>

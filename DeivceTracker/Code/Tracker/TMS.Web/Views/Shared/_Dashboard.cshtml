@@ -1,0 +1,94 @@
+﻿@model TMS.Web.Models.ViewModels.UserViewModel
+@using TMS.Model
+<div>
+    <div class="row">
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h3><span id="TotalDistributors">
+                        @{
+                            if (Session["UserData"] is Admin)
+                            {
+                                var adminId = Session["UserData"] as Admin;
+                                List<Distributor> result = new List<Distributor>();
+                                //var admin = result.Where(m => m.Parent = Guid.Parse(adminId.UserId.ToString()));
+                                if (result != null)
+                                {
+                                    var distributor = result.Count();
+                                    @Html.Label(distributor.ToString())
+                                    }
+                                }
+                            }
+                        0</span></h3> 
+                    <p>Total Distributors</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+            </div>
+        </div><!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-gray">
+                <div class="inner">
+                    <h3><span id="TotalDealers">0</span></h3>
+                    <p>Total Dealers</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+            </div>
+        </div><!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3><span id="TotalCustomers">0</span></h3>
+                    <p>Total Customers</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+            </div>
+        </div><!-- ./col -->
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3><span id="TotalVehicles">0</span></h3>
+                    <p>Total Vehicles</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+            </div>
+        </div><!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-maroon">
+                <div class="inner">
+                    <h3><span id="TotalDevices">0</span></h3>
+                    <p>Total Devices</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+            </div>
+        </div><!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-olive">
+                <div class="inner">
+                    <h3><span id="VehiclesOnline">0</span></h3>
+                    <p>Vehicles Online</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+            </div>
+        </div><!-- ./col -->
+    </div>
+</div>

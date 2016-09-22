@@ -1,0 +1,197 @@
+﻿@model List<TMS.Web.Models.ViewModels.AlertBase>
+@{
+    Layout = null;
+}
+@{
+    if (Model.Count > 0)
+    {
+        <table id="MovingAlert" class="table table-bordered table-hover" style="margin-bottom: 20px;">
+            <tr>
+                <th style="vertical-align: bottom;">
+                    <div class="col-xs-4">
+                        <label>
+                            Variable
+                        </label>
+                    </div>
+                    <div class="col-xs-4">
+                        <label>
+                            Condition
+                        </label>
+                    </div>
+                    <div class="col-xs-4">
+                        <label>
+                            Value
+                        </label>
+                    </div>
+                </th>
+                <th style="vertical-align: top;">
+                    <div class="col-xs-2">
+                        <label>IsActive</label>
+                    </div>
+                </th>
+                <th style="vertical-align: bottom;">
+                    <div class="col-xs-3">
+                        <label>Action</label>
+                    </div>
+                </th>
+                <th style="vertical-align: bottom;">
+                    <label>Email Settings</label>
+                </th>
+            </tr>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                {
+                    <tr>
+                        <td style="vertical-align: bottom;">
+                            @Html.HiddenFor(m => m[i].Id)
+                            @if (Model[i].Conditions != null)
+                        {
+                            for (int j = 0; j < Model[i].Conditions.Count; j++)
+                            {
+                                    <div class="col-xs-4">
+                                        @Model[i].Conditions[j].Operand
+                                    </div>
+                                    <div class="col-xs-4">
+                                        @Html.HiddenFor(m => m[i].Conditions[j].Operand)
+                                        @*@Html.HiddenFor(m => m[i].Conditions[j].Conjunction)*@
+
+                                        @Html.EditorFor(m => m[i].Conditions[j].Operator)
+                                    </div>
+                                    <div class="col-xs-4">
+                                        @Html.EditorFor(m => m[i].Conditions[j].Value)
+                                    </div>
+                                        @*@Model[i].Conditions[j].Conjunction.ToString()*@
+                                }
+                            }
+                        </td>
+                        <td style="vertical-align: top;">
+                            <div class="col-xs-2">
+                                @Html.EditorFor(m => m[i].IsActive)
+                            </div>
+                        </td>
+                        <td style="vertical-align: bottom;">
+                            <div class="col-xs-2">
+                                @Html.HiddenFor(m => m[i].IsToDelete)
+                                <button type="button" class="btn btn-danger btn-sm" onclick="MovingAlertToDelete(this)">
+                                    <i class="fa fa-remove"></i> &nbsp; Delete
+                                    </button>
+                                </div>
+</td>
+                        <td style="vertical-align: bottom;">
+                            @Ajax.ActionLink("Set Alert Receivers", "AlertReceivers", new { AlertId = Model[i].Id }, new AjaxOptions()
+                       {
+                           UpdateTargetId = "AlertScheduleReceiversAjaxUpdateId",
+                           InsertionMode = InsertionMode.Replace,
+                           HttpMethod = "GET",
+                           OnSuccess = "$('#AlertScheduleReceiversModal').modal();"
+                       }, new { @class = "btn btn-info btn-sm" })
+                        </td> </tr>
+                }
+            }
+        </table>
+    }
+    else
+    {
+        <div style="padding-bottom: 20px;">No alerts were scheduled</div>
+        <table id="MovingAlert" class="table table-bordered table-hover"></table>
+    }
+    <div class="">
+        <div class="">
+            <button type="button" onclick="AddMovingnAlertUI()" class="btn btn-default" >
+                <i class="fa fa-plus"></i>&nbsp;Add New   
+             </button>
+        </div>
+    </div>
+    <script>
+        function AddMovingnAlertUI() {
+            var AlerReceivers = $("table#MovingAlert");
+            var incVal = AlerReceivers.find("tr").length;
+            console.log(incVal);
+            var tr = $("<tr/>").appendTo(AlerReceivers);
+            var td1 = $("<td/>", {
+                //class: "form-group",
+            }).appendTo(tr);
+
+            $("<div/>", {
+                class: "col-xs-4",
+                text: "OnAcc"
+            }).appendTo(td1);
+
+            var tdDiv2 = $("<div/>", {
+                class: "col-xs-4"
+            }).appendTo(td1);
+
+            var input1 = $("<input/>", {
+                class: "form-control",
+                type: "text",
+                name: "[" + incVal + "].Conditions[0].Operator",
+                value: ">"
+            }).appendTo(tdDiv2);
+
+            var tdDiv3 = $("<div/>", {
+                class: "col-xs-4"
+            }).appendTo(td1);
+
+            $("<input/>", {
+                class: "form-control",
+                type: "text",
+                name: "[" + incVal + "].Conditions[0].Value",
+                value: 1
+            }).appendTo(tdDiv3);
+
+            var td2 = $("<td/>", {
+            }).appendTo(tr);
+
+            var td2Div1 = $("<div/>", {
+                class: "col-xs-2"
+            }).appendTo(td2);
+
+            $("<input/>", {
+                //class: "form-control",
+                type: "checkbox",
+                name: "[" + incVal + "].IsActive",
+                checked: true,
+                value: true
+            }).appendTo(td2Div1);
+
+            var td3 = $("<td/>", {
+            }).appendTo(tr);
+
+            var td3Div1 = $("<div/>", {
+                class: "col-xs-3"
+            }).appendTo(td3);
+
+            var td3Div1Btn = $("<input/>", {
+                type: "button",
+                name: "[" + incVal + "].IsToDelete",
+                onclick: "MovingAlertToDelete(this)",
+                value: "Delete"
+            }).appendTo(td3Div1);
+
+            $("<i/>", {
+                class: "fa fa-remove"
+            }).prependTo(td3Div1Btn);
+
+            AlerReceivers.show();
+        }
+        function MovingAlertToDelete(ele) {
+            var IsToDeleteEle = $(ele).parent().children("input[type='hidden']");
+            if (IsToDeleteEle.length > 0) {
+                if ($(ele).hasClass("cancelrequested")) {
+                    IsToDeleteEle.val(false);
+                    $(ele).removeClass("cancelrequested");
+                    $(ele).text('Delete');
+                } else {
+                    IsToDeleteEle.val(true);
+                    $(ele).addClass("cancelrequested");
+                    $(ele).text('Cancel');
+                }
+                //IsToDeleteEle.val(true);
+                //$(ele).parent().append($("<span/>", { text: "Will be deleted on Save" }));
+                //$(ele).remove();
+            } else {
+                $(ele).parents("tr").remove();
+            }
+        }
+    </script>
+} 

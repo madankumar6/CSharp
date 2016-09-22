@@ -1,0 +1,41 @@
+﻿@model List<TMS.Web.Models.ViewModels.VehicleViewModel>
+
+
+<div>
+    @Html.Label("Vehcle Gallery")
+</div>
+<div>
+    <table>
+        @{ 
+            int j = 0;
+            for(int i=0;i< Model.Count();i+=4)
+            {
+                
+            <tr>
+               @while(j<i+4 && j<Model.Count())
+               {
+                   var photo = Model[j].Image;
+                   string imageSrc = null;
+                   if(photo!=null)
+                   {
+                       string imagebase64 = Convert.ToBase64String(photo.ToArray());
+                       imageSrc=string.Format("data:image/png;base64,{0}",imagebase64);
+                   }
+
+                   <td>
+                       <img src="@imageSrc" style="width:250px;height:250px" />&nbsp;<br />
+                     &nbsp;  @Html.DisplayFor(vehic => Model[j].VehicleNo)
+
+                   </td>
+                   j++;
+               }
+
+            </tr>
+
+            }
+
+        }
+
+    </table>
+
+</div>

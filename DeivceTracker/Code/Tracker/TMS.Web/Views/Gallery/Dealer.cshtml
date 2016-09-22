@@ -1,0 +1,66 @@
+﻿@model List<TMS.Web.Models.ViewModels.DealerViewModel>
+@using TMS.Model
+
+<div>
+    @Html.Label("Dealer Gallery")
+</div>
+<br />
+<div>
+    <table id="DealerTable" width="100%">
+
+        @*foreach (var item in Model)*@
+
+        @{
+            int j = 0;
+            for (int i = 0; i < Model.Count(); i += 5)
+            {
+
+                <tr>
+                    @while (j < i + 5 && j < Model.Count())
+                    {
+
+                        byte[] photo = Model[j].Logo;
+                        string imageSrc = null;
+                        if (photo != null)
+                        {
+                            string imageBase64 = Convert.ToBase64String(photo.ToArray());
+                            imageSrc = string.Format("data:image/png;base64,{0}", imageBase64);
+                        }
+                        <td>
+                            <img src="@imageSrc" alt="Image" style="height:200px; width:200px;" />&nbsp;<br />
+                            &nbsp; @Html.DisplayFor(deal => Model[j].Username)<br />
+                            <br />
+                        </td>
+                        j++;
+                    }
+                </tr>
+            }
+        }
+
+    </table>
+
+</div>
+<script type="text/javascript">
+    SetupToastr();
+
+    var table;
+
+    $(document).ready(function () {
+        var rowsSelected = [];
+        table = $('#DealerTable').DataTable({
+            processing: true, //control the processing indicator while data is being loaded
+            serverSide: true, //process data on server-side for performance reasons.
+            info: true, //control table information display field.
+            stateSave: true, //restore table state on page reload.
+            lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
+            ajax: {
+                "type": "GET",
+                "url": '@Url.Action("Dealer", "Gallery")',
+                "contentType": 'application/json; charset=utf-8'
+            }
+        });
+
+
+    });
+
+</script>

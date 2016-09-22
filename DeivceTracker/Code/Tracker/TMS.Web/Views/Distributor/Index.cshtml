@@ -1,0 +1,224 @@
+﻿@model IEnumerable<TMS.Web.Models.ViewModels.DistributorViewModel>
+
+<div class="bs-example container">
+
+   @* <button type="button" class="btn btn-info btn-lg" id="myBtn">Open Modal</button>*@
+
+    <p>
+        <button id="AddDistributor" class="btn btn-primary collapsed" type="button" data-toggle="collapse" 
+                data-target="#AddDistributorForm" aria-expanded="false" aria-controls="AddDistributorForm">
+            <i class="fa fa-plus"></i>
+            Add Distributor
+        </button>
+        <button id="EditDistributor" class="btn btn-default collapsed" type="button">
+            <i class="fa fa-pencil"></i> Edit Distributor
+        </button>
+        <button id="DeleteDistributors" class="btn btn-danger collapsed" type="button">
+            <i class="fa fa-remove"></i>Delete Distributors
+        </button>
+        <button type="button" id="AddDevice" class="btn btn-default collapsed">
+            <i class="fa fa-plus"></i>
+            Add Device
+        </button>
+    </p>
+    <div class="collapse" id="AddDistributorForm" aria-expanded="false" style="height: 0px;">
+
+    </div>
+
+    <!-- Modal for Editing a Distributor -->
+    <div class="modal fade" id="EditDistributorModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add / Edit Distributor</h4>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="SaveEditedDistributor">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+    Html.RenderPartial("_Distributors", Model);
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        SetupToastr();
+        var table;
+
+        $(document).ready(function() {
+            var rowsSelected = [];
+
+            table = $('#DistributorTable').DataTable({
+                processing: true, //control the processing indicator while data is being loaded
+                serverSide: true, //process data on server-side for performance reasons.
+                info: true, //control table information display field.
+                stateSave: true, //restore table state on page reload.
+                lengthMenu: [[10, 20, 50], [10, 20, 50]],
+                ajax: {
+                    "type": "GET",
+                    "url": '@Url.Action("GetDistributors", "Distributor")',
+                    "contentType": 'application/json; charset=utf-8'
+                },
+                columns: [
+                    { "data": null, "orderable": false },
+                    { "data": "FirstName", "orderable": true },
+                    { "data": "LastName", "orderable": false },
+                    { "data": "Username", "orderable": false },
+                    { "data": "PhoneNo", "orderable": false },
+                    { "data": "Email", "orderable": false }
+                ],
+                columnDefs: [
+                    {
+                        targets: 0,
+                        orderable: false,
+                        searchable: false,
+                        className: 'dt-body-center',
+                        render: function(data, type, full, meta) {
+                            return '<input type="checkbox">';
+                        }
+                    }
+                ],
+                select: {
+                    style: 'multi'
+                },
+                order: 1,
+                rowCallback: function(row, data, dataIndex) {
+                    // Get row ID
+                    var rowId = data[0];
+                    // If row ID is in the list of selected row IDs
+                    if ($.inArray(rowId, rowsSelected) !== -1) {
+                        $(row).find('input[type="checkbox"]').prop('checked', true);
+                        $(row).addClass('selected');
+                    }
+                }
+            });
+
+            // Handle row selection event
+            $('#DistributorTable').on('select.dt deselect.dt', function(e, api, type, items) {
+                if (e.type === 'select') {
+                    $('tr.selected input[type="checkbox"]', api.table().container()).prop('checked', true);
+                } else {
+                    $('tr:not(.selected) input[type="checkbox"]', api.table().container()).prop('checked', false);
+                }
+
+                // Update state of "Select all" control
+                updateDataTableSelectAllCtrl(table);
+            });
+
+            // Handle click on "Select all" control
+            $('#DistributorTable thead').on('click', 'input[type="checkbox"]', function(e) {
+                if (this.checked) {
+                    table.rows({ page: 'current' }).select();
+                } else {
+                    table.rows({ page: 'current' }).deselect();
+                }
+
+                e.stopPropagation();
+            });
+
+            // Handle click on heading containing "Select all" control
+            $('thead', table.table().container()).on('click', 'th:first-child', function(e) {
+                $('input[type="checkbox"]', this).trigger('click');
+            });
+
+            // Handle table draw event
+            $('#DistributorTable').on('draw.dt', function() {
+                // Update state of "Select all" control
+                updateDataTableSelectAllCtrl(table);
+            });
+        });
+
+        $('#AddDistributor').click(function() {
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("Edit", "Distributor")',
+                data: null,
+                success: function (data) {
+                    $('.modal-body').html(data);
+                    $("#EditDistributorModal").modal();
+                }
+            });
+        });
+
+        $("#AddDevice").click(function () {
+            window.location.href = '@Url.Action("Index", "DeviceModel")';
+        });
+
+        $("#EditDistributor").click(function() {
+            var selectedRows = table.rows({ page: 'current', selected: true });
+            if (selectedRows.count() !== 1) {
+                alert("Please select a row to edit");
+                return;
+            }
+
+            var distributor = table.rows({ selected: true }).data()[0]["UserId"];
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("Edit", "Distributor")',
+                data: { 'distributorId': distributor },
+                success: function(data) {
+                    $('.modal-body').html(data);
+                    $("#EditDistributorModal").modal();
+                }
+            });
+        });
+
+        $("#SaveEditedDistributor").click(function() {
+            var formData = $("#EditDistributorForm").serialize();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Edit", "Distributor")',
+                data: formData,
+                success: function(data) {
+                    if (data.Result === "Success") {
+                        toastr.success("Updated successfully");
+                        table.ajax.reload();
+                        $("#EditDistributorModal").modal('hide');
+                    } else {
+                        $('.modal-body').html(data);
+                    }
+
+                }
+            });
+        });
+
+        $('#DeleteDistributors').click(function() {
+            var selectedRows = table.rows({ page: 'current', selected: true });
+            if (selectedRows.count() < 1) {
+                alert("Please select atleast one row");
+                return;
+            }
+            var distributors = new Array();
+            // Iterate over all selected rows
+            table.rows({ selected: true }).every(function(index) {
+                distributors.push(this.data()["UserId"]);
+            });
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Delete", "Distributor")',
+                data: { 'distributors': distributors },
+                datatype: "json",
+                traditional: true,
+                success: function(data) {
+                    if (data.Result === "Success") {
+                        toastr.success("Deleted successfully");
+                        table.ajax.reload();
+                    } else {
+                        toastr.error("Error occured");
+                    }
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,123 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracker.UnitTest", "Tracker.UnitTest\Tracker.UnitTest.csproj", "{2537DF42-B1CE-4FB4-A041-81B77F9A6C33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracker.TCPServerSystem", "Tracker.TCPServerSystem\Tracker.TCPServerSystem.csproj", "{59093A10-C56F-4E33-B6F7-01B54730213B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracker.Protocol", "Tracker.Protocol\Tracker.Protocol.csproj", "{DAC86A2F-55A3-428D-9731-3B6BE12C1742}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracker.Common", "Tracker.Common\Tracker.Common.csproj", "{342CC9DB-3268-4B69-8BB9-4908F6FD1AE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{07551B60-EF4A-4F15-B2E0-072671DE8B6E}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Tracker.DB", "Tracker.DB\Tracker.DB.sqlproj", "{4E005396-B972-4A07-8924-5F125C628C85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{E58A4EC6-D33D-4EB2-8EB0-5A9D6910DC46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracker.TcpClientTest", "Tracker.TcpClientTest\Tracker.TcpClientTest.csproj", "{95C56448-1C57-409E-9A06-0868E7A4C665}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracker.TCPClientTestSystem", "Tracker.TCPClientTestSystem\Tracker.TCPClientTestSystem.csproj", "{CF6BD48A-1B6D-465F-9DA0-BA086455D715}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackerServer", "TrackerServer\TrackerServer.csproj", "{12C07414-F330-430B-85A5-0B7E94285051}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracker.TcpServer", "Tracker.TcpServer\Tracker.TcpServer.csproj", "{4335091D-D139-495B-83F5-953730730271}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2537DF42-B1CE-4FB4-A041-81B77F9A6C33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2537DF42-B1CE-4FB4-A041-81B77F9A6C33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2537DF42-B1CE-4FB4-A041-81B77F9A6C33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2537DF42-B1CE-4FB4-A041-81B77F9A6C33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59093A10-C56F-4E33-B6F7-01B54730213B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59093A10-C56F-4E33-B6F7-01B54730213B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59093A10-C56F-4E33-B6F7-01B54730213B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59093A10-C56F-4E33-B6F7-01B54730213B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAC86A2F-55A3-428D-9731-3B6BE12C1742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAC86A2F-55A3-428D-9731-3B6BE12C1742}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAC86A2F-55A3-428D-9731-3B6BE12C1742}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAC86A2F-55A3-428D-9731-3B6BE12C1742}.Release|Any CPU.Build.0 = Release|Any CPU
+		{342CC9DB-3268-4B69-8BB9-4908F6FD1AE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{342CC9DB-3268-4B69-8BB9-4908F6FD1AE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{342CC9DB-3268-4B69-8BB9-4908F6FD1AE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{342CC9DB-3268-4B69-8BB9-4908F6FD1AE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07551B60-EF4A-4F15-B2E0-072671DE8B6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07551B60-EF4A-4F15-B2E0-072671DE8B6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07551B60-EF4A-4F15-B2E0-072671DE8B6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07551B60-EF4A-4F15-B2E0-072671DE8B6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E005396-B972-4A07-8924-5F125C628C85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E005396-B972-4A07-8924-5F125C628C85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E005396-B972-4A07-8924-5F125C628C85}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{4E005396-B972-4A07-8924-5F125C628C85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E005396-B972-4A07-8924-5F125C628C85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E005396-B972-4A07-8924-5F125C628C85}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E58A4EC6-D33D-4EB2-8EB0-5A9D6910DC46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E58A4EC6-D33D-4EB2-8EB0-5A9D6910DC46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E58A4EC6-D33D-4EB2-8EB0-5A9D6910DC46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E58A4EC6-D33D-4EB2-8EB0-5A9D6910DC46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95C56448-1C57-409E-9A06-0868E7A4C665}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95C56448-1C57-409E-9A06-0868E7A4C665}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95C56448-1C57-409E-9A06-0868E7A4C665}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95C56448-1C57-409E-9A06-0868E7A4C665}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF6BD48A-1B6D-465F-9DA0-BA086455D715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF6BD48A-1B6D-465F-9DA0-BA086455D715}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF6BD48A-1B6D-465F-9DA0-BA086455D715}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF6BD48A-1B6D-465F-9DA0-BA086455D715}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12C07414-F330-430B-85A5-0B7E94285051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12C07414-F330-430B-85A5-0B7E94285051}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12C07414-F330-430B-85A5-0B7E94285051}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12C07414-F330-430B-85A5-0B7E94285051}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4335091D-D139-495B-83F5-953730730271}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4335091D-D139-495B-83F5-953730730271}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4335091D-D139-495B-83F5-953730730271}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4335091D-D139-495B-83F5-953730730271}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 12
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://devicetrack.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Tracker.UnitTest\\Tracker.UnitTest.csproj
+		SccProjectName1 = Tracker.UnitTest
+		SccLocalPath1 = Tracker.UnitTest
+		SccProjectUniqueName2 = Tracker.TCPServerSystem\\Tracker.TCPServerSystem.csproj
+		SccProjectName2 = Tracker.TCPServerSystem
+		SccLocalPath2 = Tracker.TCPServerSystem
+		SccProjectUniqueName3 = Tracker.Protocol\\Tracker.Protocol.csproj
+		SccProjectName3 = Tracker.Protocol
+		SccLocalPath3 = Tracker.Protocol
+		SccProjectUniqueName4 = Tracker.Common\\Tracker.Common.csproj
+		SccProjectName4 = Tracker.Common
+		SccLocalPath4 = Tracker.Common
+		SccProjectUniqueName5 = DAL\\DAL.csproj
+		SccProjectName5 = DAL
+		SccLocalPath5 = DAL
+		SccProjectUniqueName6 = Tracker.DB\\Tracker.DB.sqlproj
+		SccProjectName6 = Tracker.DB
+		SccLocalPath6 = Tracker.DB
+		SccProjectUniqueName7 = Utils\\Utils.csproj
+		SccProjectName7 = Utils
+		SccLocalPath7 = Utils
+		SccProjectUniqueName8 = Tracker.TcpClientTest\\Tracker.TcpClientTest.csproj
+		SccProjectName8 = Tracker.TcpClientTest
+		SccLocalPath8 = Tracker.TcpClientTest
+		SccProjectUniqueName9 = Tracker.TCPClientTestSystem\\Tracker.TCPClientTestSystem.csproj
+		SccProjectName9 = Tracker.TCPClientTestSystem
+		SccLocalPath9 = Tracker.TCPClientTestSystem
+		SccProjectUniqueName10 = TrackerServer\\TrackerServer.csproj
+		SccProjectName10 = TrackerServer
+		SccLocalPath10 = TrackerServer
+		SccProjectUniqueName11 = Tracker.TcpServer\\Tracker.TcpServer.csproj
+		SccProjectName11 = Tracker.TcpServer
+		SccLocalPath11 = Tracker.TcpServer
+	EndGlobalSection
+EndGlobal

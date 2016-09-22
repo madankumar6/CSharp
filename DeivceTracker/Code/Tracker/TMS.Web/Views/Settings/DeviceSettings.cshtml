@@ -1,0 +1,59 @@
+﻿@model TMS.Web.Models.ViewModels.DeviceSettingsViewModel
+@{
+    ViewBag.Title = "Odometer";
+    Layout = "~/Views/Shared/_LayoutLTE.cshtml";
+}
+
+<h2>Odometer</h2>
+
+@{
+    if (TempData["Result"] != null)
+    {
+        if (((bool)TempData["Result"]) == true)
+        {
+            <div>
+                Saved Successfully
+            </div>
+        }
+        else
+        {
+            <div>
+                Failed to save
+            </div>
+        }
+    }
+}
+
+
+
+<form method="post" action="">
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.DeviceId)
+        @Html.DropDownListFor(m => m.DeviceId, new SelectList(Model.DeviceList, "Value", "Text"),
+           new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Odometer)
+        @Html.TextBoxFor(m => m.Odometer, null, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+    </div>
+    <div class="form-group">
+        @Html.Label("Fuel Capacity (Ltrs)")
+        @Html.TextBox("Capacity", null, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+    </div>
+    <div>
+        @Html.Label("Average Km/Ltr")
+        @Html.TextBox("Average", null, new { @class = "form-control col-md-6", @placeholder = " ", @required = "true" })
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+<script>
+    var UrlToProcess = "";
+    $("#DeviceId").change(function () {
+        UrlToProcess = UrlToProcess + "?DeviceId=" + $(this).val();
+        window.location.href = UrlToProcess;
+    });
+</script>

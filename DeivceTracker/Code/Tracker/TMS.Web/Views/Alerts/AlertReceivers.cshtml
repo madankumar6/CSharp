@@ -1,0 +1,130 @@
+﻿@model List<TMS.Web.Models.ViewModels.AlertReceiver>
+@{
+    Layout = null;
+}
+@using (Ajax.BeginForm(new AjaxOptions()
+{
+    UpdateTargetId = "AlertScheduleReceiversAjaxUpdateId",
+    InsertionMode = InsertionMode.Replace,
+    OnSuccess = "$('#AlertScheduleReceiversModal').modal('hide');",
+    HttpMethod = "POST"
+}))
+{
+
+    <div class="form-horizontal">
+        @Html.AntiForgeryToken()
+        @Html.Hidden("AlertId", Request.QueryString["AlertId"])
+        <table id="AlerReceivers" class="table table-bordered table-hover" style="margin-bottom: 20px;@(!(Model.Count > 0)?"display:none;":"")">
+            <tr>
+                <td>
+                    <label>MediumType</label>
+                </td>
+                <td>
+                    <label>Email/Phone Number</label>
+                </td>
+            </tr>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td class="">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model[i].Id)
+                        @Html.HiddenFor(model => model[i].AlertId)
+                        <div>
+                            @{
+                                var MediumListType = new SelectList(
+                                    new List<SelectListItem>
+                                    {
+                                        new SelectListItem { Text = "Email", Value = "Email"},
+                                        new SelectListItem { Text = "SMS", Value = "SMS"}
+                                    },
+                                    "Value",
+                                    "Text", Model[i].MediumType);
+                            }
+                            @Html.DropDownListFor(model => model[i].MediumType, MediumListType, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model[i].MediumType, "", new { @class = "text-danger" })
+                        </div>
+                    </td>
+
+                    <td class="">
+                        <div>
+                            @Html.EditorFor(model => model[i].To, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model[i].To, "", new { @class = "text-danger" })
+                        </div>
+                    </td>
+                    <td class="">
+                        <div>
+                            @Html.HiddenFor(model => model[i].IsToDelete)
+                            <button type="button" class="btn btn-danger" onclick="AlertReceiversToDelete(this)">
+                                <i class="fa fa-remove"></i>&nbsp; Delete
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                                }
+        </table>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" style="float: right;" />
+                <input type="button" value="Add New" onclick="AddAlertReceiversUI()" class="btn btn-default" />
+            </div>
+        </div>
+        <script>
+            function AddAlertReceiversUI() {
+                var AlerReceivers = $("table#AlerReceivers");
+                var incVal = AlerReceivers.find("tr").length - 1;
+                var tr = $("<tr/>").appendTo(AlerReceivers);
+                var td1 = $("<td/>", {
+                    class: "form-group",
+                }).appendTo(tr);
+
+                var input1 = $("<select/>", {
+                    class: "form-control",
+                    type: "text",
+                    name: "[" + incVal + "].MediumType",
+                    value: "Email"
+                }).appendTo(td1);
+                $("<option/>", {
+                    value: "Email",
+                    text: "Email",
+                    selected: true
+                }).appendTo(input1);
+                $("<option/>", {
+                    value: "SMS",
+                    text: "SMS"
+                }).appendTo(input1);
+
+                var td2 = $("<td/>", {
+                    class: "form-group",
+                }).appendTo(tr);
+                $("<input/>", {
+                    class: "form-control",
+                    type: "text",
+                    name: "[" + incVal + "].To"
+                }).appendTo(td2);
+
+                var td3 = $("<td/>", {
+                    class: "form-group",
+                }).appendTo(tr);
+                $("<input/>", {
+                    class: "form-control",
+                    type: "button",
+                    name: "[" + incVal + "].IsToDelete",
+                    onclick: "AlertReceiversToDelete(this)",
+                    value: "Delete"
+                }).appendTo(td3);
+                AlerReceivers.show();
+            }
+            function AlertReceiversToDelete(ele) {
+                var IsToDeleteEle = $(ele).parent().children("input[type='hidden']");
+                if (IsToDeleteEle.length > 0) {
+                    IsToDeleteEle.val(true);
+                    $(ele).parent().append($("<span/>", { text: "Will be deleted on Save" }));
+                    $(ele).remove();
+                } else {
+                    $(ele).parents("tr").remove();
+                }
+            }
+        </script>
+    </div>
+                                }

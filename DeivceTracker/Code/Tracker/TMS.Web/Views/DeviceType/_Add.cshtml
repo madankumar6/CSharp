@@ -1,0 +1,24 @@
+﻿@model TMS.Web.Models.ViewModels.DeviceTypeViewModel
+@using TMS.Model
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="">
+
+
+            @using (Html.BeginForm("Add", "DeviceType", FormMethod.Post, new { id = "EditDealerForm", @role = "form", enctype = "multipart/form-data" }))
+            {
+                @Html.HiddenFor(m => m.DeviceTypeId)
+                @Html.AntiForgeryToken()
+
+                <div class="box-body">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.DeviceModel_Type)
+                        @Html.TextBoxFor(m => m.DeviceModel_Type, new { @class = "form-control", @placeholder = " ", @required = "true" })
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>

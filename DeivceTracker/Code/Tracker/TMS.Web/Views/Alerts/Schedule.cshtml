@@ -1,0 +1,376 @@
+﻿
+@{
+    ViewBag.Title = "Schedule";
+    Layout = "~/Views/Shared/_LayoutLTE.cshtml";
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<div id="AjaxLoadingIndicator" style="top: 0px;width: 100%;height: 100%;position: absolute;height: 700px;z-index: 9999;background-color: #FFF;opacity: 0.8;margin: 0px;padding: 30% 0px 0px;left: 0px;text-align: center;padding-top: 30%;font-size: 3em;letter-spacing: 3px;">Loading...</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- Custom Tabs -->
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab_ignition" data-toggle="tab">Ignition Alert</a></li>
+                <li><a href="#tab_speedalert" data-toggle="tab">Speed Alert</a></li>
+                <li><a href="#tab_stoppage" data-toggle="tab">Stoppage Alert</a></li>
+                @*<li><a href="#tab_moving" data-toggle="tab">Moving Alert</a></li>*@
+                <li onclick="fenceTabClick()"><a href="#tab_fence" data-toggle="tab">Fence Alert</a></li>
+                <li><a href="#tab_powercut" data-toggle="tab">Power Cut Alert</a></li>
+                @*<li><a href="#tab_sos" data-toggle="tab">SOS Alert</a></li>*@
+                <li><a href="#tab_Ac" data-toggle="tab">AC Alert</a></li>
+            </ul>
+            <div class="tab-content">
+
+                <div class="tab-pane active" id="tab_ignition">
+                    @using (Ajax.BeginForm("Ignition", "Alerts", new AjaxOptions
+                    {
+                        HttpMethod = "Get",
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "ignitionAlertSetting",
+                        LoadingElementId = "AjaxLoadingIndicator",
+                        OnComplete = "processHideAlertSaveMsg"
+                    }, new { @Id = "IgnitionAlertAjaxForm" }))
+                    {
+                    }
+
+                    @using (Ajax.BeginForm("Ignition", "Alerts", new AjaxOptions
+                    {
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "ignitionAlertSetting",
+                        LoadingElementId = "AjaxLoadingIndicator",
+                        OnComplete = "processHideAlertSaveMsg"
+                    }))
+                    {
+                        <div id="ignitionAlertSetting">
+
+                        </div>
+                    }
+                </div>
+
+                <div class="tab-pane" id="tab_speedalert">
+                    @using (Ajax.BeginForm("GetSpeedAlertList", "Alerts", new AjaxOptions
+                    {
+                        HttpMethod = "Get",
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "speedListCollection",
+                        LoadingElementId = "AjaxLoadingIndicator"
+                    }, new { @Id = "SpeedAlertListCollectionForm" }))
+                    {
+                        <input type="hidden" class="IdToShow" id="IdToShow" name="IdToShow" />
+                    }
+                    @using (Ajax.BeginForm("Speed", "Alerts", new AjaxOptions
+                    {
+                        HttpMethod = "Get",
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "speedAlertSetting",
+                        LoadingElementId = "AjaxLoadingIndicator",
+                        OnComplete = "processHideAlertSaveMsg"
+                    }, new { @Id = "SpeedAlertAjaxForm" }))
+                    {
+                        <div class="row">
+                            <div class="col-md-11">
+                                <div class="form-group">
+                                    <div id="speedListCollection">
+                                        @Html.Action("GetSpeedAlertList")
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                @Ajax.ActionLink("New", "Speed", null, new AjaxOptions
+                       {
+                           HttpMethod = "Get",
+                           InsertionMode = InsertionMode.Replace,
+                           UpdateTargetId = "speedAlertSetting",
+                           LoadingElementId = "AjaxLoadingIndicator",
+                           OnComplete = "processHideAlertSaveMsg"
+                       }, new { @class = "btn btn-primary" })
+                            </div>
+                            <hr />
+                        </div>
+                    }
+
+                    @using (Ajax.BeginForm("Speed", "Alerts", new AjaxOptions
+                    {
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "speedAlertSetting",
+                        LoadingElementId = "AjaxLoadingIndicator",
+                        OnComplete = "onSpeedAlertSave"
+                    }))
+                    {
+                        <div id="speedAlertSetting">
+
+                        </div>
+                    }
+                </div>
+
+                <div class="tab-pane" id="tab_stoppage">
+                    @using (Ajax.BeginForm("GetStoppageAlertList", "Alerts", new AjaxOptions
+                    {
+                        HttpMethod = "Get",
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "stopListCollection",
+                        LoadingElementId = "AjaxLoadingIndicator"
+                    }, new { @Id = "StoppageAlertListCollectionForm" }))
+                    {
+                        <input type="hidden" class="IdToShow" name="IdToShow" />
+                    }
+                    @using (Ajax.BeginForm("Stoppage", "Alerts", new AjaxOptions
+                    {
+                        HttpMethod = "Get",
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "stopAlertSetting",
+                        LoadingElementId = "AjaxLoadingIndicator",
+                        OnComplete = "processHideAlertSaveMsg"
+                    }, new { @Id = "StopAlertAjaxForm" }))
+                    {
+                        <div class="row">
+                            <div class="col-md-11">
+                                <div class="form-group">
+                                    <div id="stopListCollection">
+                                        @Html.Action("GetStoppageAlertList")
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                @Ajax.ActionLink("New", "Stoppage", null, new AjaxOptions
+                           {
+                               HttpMethod = "Get",
+                               InsertionMode = InsertionMode.Replace,
+                               UpdateTargetId = "stopAlertSetting",
+                               LoadingElementId = "AjaxLoadingIndicator",
+                               OnComplete = "processHideAlertSaveMsg"
+                           }, new { @class = "btn btn-primary" })
+                            </div>
+                            <hr />
+                        </div>
+                    }
+
+                    @using (Ajax.BeginForm("Stoppage", "Alerts", new AjaxOptions
+                    {
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "stopAlertSetting",
+                        LoadingElementId = "AjaxLoadingIndicator",
+                        OnComplete = "onStoppageAlertSave"
+                    }))
+                    {
+                        <div id="stopAlertSetting">
+
+                        </div>
+                    }
+                </div>
+
+                @*<div class="tab-pane" id="tab_moving">
+                        @Html.Action("Moving")
+                    </div>*@
+
+                <div class="tab-pane" id="tab_fence">
+                    @using (Ajax.BeginForm("GetFenceAlertList", "Alerts", new AjaxOptions
+                    {
+                        HttpMethod = "Get",
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "fenceListCollection",
+                        LoadingElementId = "AjaxLoadingIndicator"
+                    }, new { @Id = "FenceAlertListCollectionForm" }))
+                    {
+                        <input type="hidden" class="IdToShow" id="IdToShow" name="IdToShow" />
+                    }
+                    @using (Ajax.BeginForm("Fence", "Alerts", new AjaxOptions
+                    {
+                        HttpMethod = "Get",
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "fenceAlertSetting",
+                        LoadingElementId = "AjaxLoadingIndicator",
+                        OnComplete = "onFenceAlertEditStart"
+                    }, new { @Id = "FenceAlertAjaxForm" }))
+                    {
+                        <div class="row">
+                            <div class="col-md-11">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="form-group">
+                                            <div id="fenceListCollection">
+                                                @Html.Action("GetFenceAlertList")
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-default" onclick="fenceDuplicate()">Duplicate</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+
+                                @Ajax.ActionLink("New", "Fence", null, new AjaxOptions
+                           {
+                               HttpMethod = "Get",
+                               InsertionMode = InsertionMode.Replace,
+                               UpdateTargetId = "fenceAlertSetting",
+                               LoadingElementId = "AjaxLoadingIndicator",
+                               OnComplete = "onFenceAlertEditStart"
+                           }, new { @class = "btn btn-primary" })
+                            </div>
+                            <hr />
+                        </div>
+                    }
+
+                    @using (Ajax.BeginForm("Fence", "Alerts", new AjaxOptions
+                    {
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "fenceAlertSetting",
+                        LoadingElementId = "AjaxLoadingIndicator",
+                        OnComplete = "onFenceAlertSave"
+                    }))
+                    {
+                        <div id="fenceAlertSetting">
+
+                        </div>
+                    }
+                </div>
+
+                <div class="tab-pane" id="tab_powercut">
+                    @using (Ajax.BeginForm("PowerCut", "Alerts", new AjaxOptions
+                    {
+                        HttpMethod = "Get",
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "PowerCutAlertSetting",
+                        LoadingElementId = "AjaxLoadingIndicator",
+                        OnComplete = "processHideAlertSaveMsg"
+                    }, new { @Id = "PowerCutAlertAjaxForm" }))
+                    {
+                    }
+
+                    @using (Ajax.BeginForm("PowerCut", "Alerts", new AjaxOptions
+                    {
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "PowerCutAlertSetting",
+                        LoadingElementId = "AjaxLoadingIndicator",
+                        OnComplete = "processHideAlertSaveMsg"
+                    }))
+                    {
+                        <div id="PowerCutAlertSetting">
+
+                        </div>
+                    }
+                </div>
+
+                @*<div class="tab-pane" id="tab_sos">
+                        @Html.Action("Sos")
+                    </div>*@
+
+                <div class="tab-pane" id="tab_Ac">
+                    @using (Ajax.BeginForm("Ac", "Alerts", new AjaxOptions
+                    {
+                        HttpMethod = "Get",
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "AcAlertSetting",
+                        LoadingElementId = "AjaxLoadingIndicator",
+                        OnComplete = "processHideAlertSaveMsg"
+                    }, new { @Id = "AcAlertAjaxForm" }))
+                    {
+                    }
+
+                    @using (Ajax.BeginForm("Ac", "Alerts", new AjaxOptions
+                    {
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "AcAlertSetting",
+                        LoadingElementId = "AjaxLoadingIndicator",
+                        OnComplete = "processHideAcSaveMsg"
+                    }))
+                    {
+                        <div id="AcAlertSetting">
+
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBWUc0EJoamD0c5KFiXjdvrcSj-8qfFwDo&libraries=places"></script>
+
+
+<script type="text/javascript">
+
+    function processHideAlertSaveMsg() {
+        setTimeout(function () {
+            $(".alertSaveResponseMsg").remove();
+        }, 5000);
+    }
+
+    function onSpeedAlertSave(data) {
+        processHideAlertSaveMsg();
+
+        var updatedId = ($(data.responseText).find("#Id").val());
+        $("#SpeedAlertListCollectionForm .IdToShow").val(updatedId);
+        $("#SpeedAlertListCollectionForm").submit();
+    }
+
+    function onStoppageAlertSave(data) {
+        processHideAlertSaveMsg();
+        var updatedId = ($(data.responseText).find("#Id").val());
+
+        $("#StoppageAlertListCollectionForm .IdToShow").val(updatedId);
+        $("#StoppageAlertListCollectionForm").submit();
+    }
+
+    function onAcAlertSave(data) {
+        processHideAlertSaveMsg();
+
+        var updatedId = ($(data.responseText).find("#Id").val());
+        $("#AcAlertListCollectionForm .IdToShow").val(updatedId);
+        $("#AcAlertListCollectionForm").submit();
+    }
+
+    function onFenceAlertEditStart() {
+        processHideAlertSaveMsg();
+        editFenceInMap();
+    }
+
+    function onFenceAlertSave(data) {
+        processHideAlertSaveMsg();
+
+        var updatedId = ($(data.responseText).find("#Id").val());
+
+        $("#FenceAlertListCollectionForm .IdToShow").val(updatedId);
+        $("#FenceAlertListCollectionForm").submit();
+
+        editFenceInMap();
+    }
+
+    function fenceTabClick() {
+        $('#FenceAlertAjaxForm').submit()
+    }
+
+    $(document).ready(function () {
+        $("#IgnitionAlertAjaxForm").submit();
+        $("#SpeedAlertAjaxForm").submit();
+        $("#StopAlertAjaxForm").submit();
+        //$("#FenceAlertAjaxForm").submit();
+        $("#PowerCutAlertAjaxForm").submit();
+        $("#AcAlertAjaxForm").submit();
+    });
+</script>
+
+<div class="modal fade" id="AlertScheduleReceiversModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add / Edit Receivers</h4>
+            </div>
+            <div class="modal-body">
+                <div id="AlertScheduleReceiversAjaxUpdateId" style="display: block; vertical-align: top;">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

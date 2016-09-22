@@ -1,0 +1,42 @@
+﻿CREATE PROCEDURE [dbo].[T_GetDeviceData]
+AS
+BEGIN
+	SELECT
+		DeviceId,
+		IMEI,
+		CommandType,
+		StatusCode,
+		Latitude,
+		Longitude,
+		Speed,
+		Direction,
+		Altitude,
+		Mileage,
+		ValidData,
+		FullAddress,
+		NULL AS PayLoad,
+		UnParsedPayload,
+		Distance,
+		Odometer,
+		OnBattery,
+		OnIgnition,
+		OnAc,
+		OnGps,
+		UnKnown,
+		GeozoneIndex,
+		GeozoneID,
+		
+		OnAcc,
+		OilNElectricConected,
+		OnSOS,
+		OnLowBattery,
+		OnPowerCut,
+		OnShock,
+		OnCharge,
+		OnDefence,
+		VoltageLevel,
+		SignalStrengthLevel,
+		AlarmType
+	FROM
+		DeviceData
+END

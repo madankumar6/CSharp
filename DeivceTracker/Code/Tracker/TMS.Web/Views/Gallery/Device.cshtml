@@ -1,0 +1,35 @@
+﻿@model List<TMS.Web.Models.ViewModels.DeviceViewModel>
+
+<div>
+    @Html.Label("Device Gallery")
+</div>
+<div>
+    <table width="100%">
+        @{
+            int j = 0;
+            for (int i = 0; i < Model.Count(); i += 5)
+            {
+                <tr>
+                    @while (j < i + 5 && j < Model.Count)
+                    {
+                        byte[] photo = Model[j].Image;
+                        string imageSrc = null;
+                        if (photo != null)
+                        {
+                            var imagebase64 = Convert.ToBase64String(photo.ToArray());
+                            imageSrc = string.Format("data:image/png;base64", imagebase64);
+                        }
+                        <td>
+                            <img src="@imageSrc" style="width:200px;height:200px" />&nbsp;<br />
+                            &nbsp;@Html.DisplayFor(dev => Model[j].IMEINo)<br />
+                        </td>
+                        j++;
+                    }
+                </tr>       
+            }
+
+        }
+
+    </table>
+
+</div>

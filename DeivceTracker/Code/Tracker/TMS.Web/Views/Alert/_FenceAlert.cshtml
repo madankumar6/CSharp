@@ -1,0 +1,404 @@
+﻿@model List<TMS.Web.Models.ViewModels.AlertBase>
+
+@{
+    Layout = null;
+}
+
+<style type="text/css">
+    .transition {
+        -webkit-transition: all 0.5s ease; /* Safari 3.2+, Chrome */
+        -moz-transition: all 0.5s ease; /* Firefox 4-15 */
+        -o-transition: all 0.5s ease; /* Opera 10.5-12.00 */
+        transition: all 0.5s ease; /* Firefox 16+, Opera 12.50+ */
+    }
+
+    ul#FenceAlertHolder {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+        ul#FenceAlertHolder li {
+            border-bottom: 1px solid #AAA;
+            padding: 10px;
+        }
+
+            ul#FenceAlertHolder li:hover {
+                background-color: #EFEFEF;
+            }
+
+            ul#FenceAlertHolder li:last-child {
+                border: none;
+            }
+
+            ul#FenceAlertHolder li span {
+                display: block;
+                padding: 0 0 5px 0;
+            }
+
+            ul#FenceAlertHolder li span .fenceDisplayName {
+                font-weight: 700;
+            }
+
+    .fenceCreateBtn {
+        margin: 10px;
+    }
+</style>
+<div style="display: table; width: 100%; position: relative;">
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box" style="position: absolute;top: 0px;z-index: 10;margin-top: 10px;height: 32px;margin-left: 115px;padding: 5px;min-width: 350px;">
+    <div id="fenceMapContainer" style="display: table-cell; width : 80%; height: 450px; vertical-align: top;">
+
+    </div>
+    <div style="display: table-cell; width : 20%; vertical-align: top;">
+        <div>
+            <ul id="FenceAlertHolder">
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    {
+                        <li class="fenceGroup transition">
+                            <span>
+                                @Html.HiddenFor(m => m[i].Id)
+                                @Html.HiddenFor(m => m[i].IsToDelete, new { @class = "IsToDelete" })
+                                @Html.TextBoxFor(m => m[i].Name, new { @class = "fenceNameTxt", @style = "display: none;" })
+                                <span class="fenceDisplayName">@Model[i].Name</span>
+                                <input type="hidden" name="fenceBckName" class="fenceBckName" value="@Model[i].Name" />
+                                @if (Model[i].Conditions != null)
+                                {
+                                    @*for (int j = 0; j < Model[i].Conditions.Count; j++)
+                                        {
+                                            <span>@Model[i].Conditions[j].Operand</span>
+                                        }*@
+                                var fStrName = "[" + i + "].FenceListStr";
+                                <input type="hidden" name="@(fStrName)" class="FenceList"
+                                       value="@string.Join(";", Model[i].FenceList.Select(m => "" + m.Lat + ", " + m.Lang + "").ToArray())" />
+                                }
+                                @*@Html.CheckBoxFor(m => m[i].IsActive, new { @class = "fenceactiveChk", @style = "display: none;" })*@
+                                <input type="hidden" name="fenceBckActiveChk" class="fenceBckActiveChk" value="@Model[i].IsActive.ToString()" />
+                            </span>
+                            <span class="ctrls">
+                                <input class="btn btn-primary btn-sm fencebtns" type="button" value="Edit" onclick="processFenceEdit(this)" />
+
+                                @Ajax.ActionLink("Set Alert Receivers", "AlertReceivers", new { AlertId = Model[i].Id }, new AjaxOptions()
+                           {
+                               UpdateTargetId = "AlertScheduleReceiversAjaxUpdateId",
+                               InsertionMode = InsertionMode.Replace,
+                               HttpMethod = "GET",
+                               OnSuccess = "$('#AlertScheduleReceiversModal').modal();"
+                           }, new { @class = "btn btn-info btn-sm fencebtns" })
+
+                                <input class="btn btn-primary btn-sm fencebtns oneditbtn" type="button" value="Update" onclick="processFenceSave(this, 'save')" style="display: none;" />
+                                <input class="btn btn-danger btn-sm fencebtns oneditbtn" type="button" value="Delete" onclick="processFenceSave(this, 'delete')" style="display: none;" />
+                                <input class="btn btn-default btn-sm fencebtns oneditbtn" type="button" value="Cancel" onclick="processFenceSave(this, 'cancel')" style="display: none;" />
+                            </span>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+        <button class="btn btn-primary btn-sm fenceCreateBtn" type="button" onclick="AddFenceAlert()">Create fence</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function processFenceEdit(ele) {
+        var parentLiGp = $(ele).parents("li.fenceGroup");
+        parentLiGp.find(".fencebtns").each(function (element) {
+            if ($(this).hasClass("oneditbtn")) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+        parentLiGp.find(".fenceactiveChk").show();
+        parentLiGp.find(".fenceNameTxt").show();
+        parentLiGp.find(".fenceDisplayName").hide();
+
+        editFenceInMap(ele);
+        $(ele).parents("ul").find("li").hide();
+        parentLiGp.show();
+        $(".fenceCreateBtn").hide();
+    }
+
+    function processFenceSave(ele, action) {
+        removeMapClickListener();
+        $(ele).parents("ul").find("li").each(function () {
+            if (!$(this).hasClass("delete")) {
+                $(this).show();
+            }
+        });
+        $(".fenceCreateBtn").show();
+
+        var parentLiGp = $(ele).parents("li.fenceGroup");
+        parentLiGp.find(".fencebtns").each(function (element) {
+            if ($(this).hasClass("oneditbtn")) {
+                $(this).hide();
+            } else {
+                $(this).show();
+            }
+        });
+
+        parentLiGp.find(".fenceactiveChk").hide();
+        parentLiGp.find(".fenceNameTxt").hide();
+        parentLiGp.find(".fenceDisplayName").show();
+
+        if (action == "save") {
+            //parentLiGp.find(".fenceBckActiveChk").val(parentLiGp.find(".fenceactiveChk").val());
+            parentLiGp.find(".fenceDisplayName").text(parentLiGp.find(".fenceNameTxt").val());
+            parentLiGp.find(".fenceBckName").val(parentLiGp.find(".fenceNameTxt").val());
+
+            getFencePathToSave(ele);
+            showFenceInMap(ele);
+        }
+        else if (action == "delete") {
+            deleteFenceInMap(ele);
+            var deleteEle = parentLiGp.find(".IsToDelete");
+            if (deleteEle.length > 0) {
+                deleteEle.val(true);
+                //$(ele).parent().append($("<span/>", { text: "Will be deleted on Save" }));
+                //$(ele).remove();
+                parentLiGp.hide();
+                parentLiGp.addClass("delete");
+            } else {
+                parentLiGp.remove();
+            }
+        } else {
+            //parentLiGp.find(".fenceactiveChk").val(parentLiGp.find(".fenceBckActiveChk").val());
+            parentLiGp.find(".fenceDisplayName").text(parentLiGp.find(".fenceBckName").val());
+            parentLiGp.find(".fenceNameTxt").val(parentLiGp.find(".fenceBckName").val());
+
+            showFenceInMap(ele);
+
+            if (parentLiGp.hasClass("newfence")) {
+                parentLiGp.remove();
+            }
+        }
+    }
+
+    function AddFenceAlert() {
+        var FenceAlertHolder = $("ul#FenceAlertHolder");
+        var incVal = FenceAlertHolder.find("li").length;
+        var li = $("<li/>", {
+            class: "fenceGroup newfence",
+        }).appendTo(FenceAlertHolder);
+
+        var span1 = $("<span/>", {
+            class: "",
+        }).appendTo(li);
+
+        var input1 = $("<input/>", {
+            class: "fenceNameTxt",
+            type: "text",
+            name: "[" + incVal + "].Name",
+            value: ""
+        }).appendTo(span1);
+
+        var input1 = $("<span/>", {
+            class: "fenceDisplayName",
+            text: "",
+        }).appendTo(span1);
+
+        $("<input/>", {
+            class: "FenceList",
+            type: "hidden",
+            name: "[" + incVal + "].FenceListStr",
+            value: ""
+        }).appendTo(span1);
+
+        $("<input/>", {
+            class: "fenceBckActiveChk",
+            type: "checkbox",
+            name: "[" + incVal + "].IsActive",
+            checked: true,
+            value: true,
+            style: "display: none"
+        }).appendTo(span1);
+
+
+        var span2 = $("<span/>", {
+            class: "ctrls",
+        }).appendTo(li);
+
+
+        var editBtn = $("<input/>", {
+            class: "btn btn-primary btn-sm fencebtns",
+            type: "button",
+            value: "Edit",
+            style: "display: none",
+            onClick: "processFenceEdit(this)"
+        }).appendTo(span2);
+
+
+        $("<input/>", {
+            class: "btn btn-primary btn-sm fencebtns oneditbtn",
+            type: "button",
+            value: "Update",
+            onClick: "processFenceSave(this, 'save')"
+        }).appendTo(span2);
+
+        $("<input/>", {
+            class: "btn btn-danger btn-sm fencebtns oneditbtn",
+            type: "button",
+            value: "Delete",
+            onClick: "processFenceSave(this, 'delete')"
+        }).appendTo(span2);
+
+        $("<input/>", {
+            class: "btn btn-default btn-sm fencebtns oneditbtn",
+            type: "button",
+            value: "Cancel",
+            onClick: "processFenceSave(this, 'cancel')"
+        }).appendTo(span2);
+
+        processFenceEdit(editBtn);
+    }
+
+
+</script>
+
+<script type="text/javascript">
+    var poly;
+    var map;
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('fenceMapContainer'), {
+            zoom: 10,
+            center: { lat: 11.000849293365269, lng: 76.95716857910156 }  // Center the map on Chicago, USA.
+        });
+
+        poly = new google.maps.Polygon({
+            strokeColor: '#AA0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#AAAAAA',
+            fillOpacity: 0.4
+        });
+
+        poly.setMap(map);
+
+        // Create the search box and link it to the UI element.
+        var input = document.getElementById('pac-input');
+        var searchBox = new google.maps.places.SearchBox(input);
+        //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function () {
+            var places = searchBox.getPlaces();
+
+            if (places.length == 0) {
+                return;
+            }
+
+            // For each place, get the icon, name and location.
+            var bounds = new google.maps.LatLngBounds();
+            places.forEach(function (place) {
+                if (place.geometry.viewport) {
+                    // Only geocodes have viewport.
+                    bounds.union(place.geometry.viewport);
+                } else {
+                    bounds.extend(place.geometry.location);
+                }
+            });
+            map.fitBounds(bounds);
+        });
+
+    }
+
+
+    function showFenceInMap(fenceEditEle) {
+        poly.setDraggable(false);
+        poly.setEditable(false);
+
+        var path = poly.getPath();
+        path.clear();
+
+        var fenceEle = $(fenceEditEle).parents("li.fenceGroup")[0];
+        var fenceListEle = $(fenceEle).find(".FenceList")[0];
+        var fenceList = $(fenceListEle).val().split(";");
+
+        var bounds = new google.maps.LatLngBounds();
+
+        fenceList.map(function (item) {
+            var itmArr = item.split(",");
+            var latLng = new google.maps.LatLng(parseFloat(itmArr[0]), parseFloat(itmArr[1]));
+            path.push(latLng);
+            bounds.extend(latLng);
+            //return latLng;
+        });
+        map.panToBounds(bounds);
+    }
+
+    function deleteFenceInMap(fenceEditEle) {
+        var path = poly.getPath();
+        path.clear();
+    }
+
+    function editFenceInMap(fenceEditEle) {
+        var fenceEle = $(fenceEditEle).parents("li.fenceGroup")[0];
+
+        poly.setDraggable(true);
+        poly.setEditable(true);
+
+        var fenceListEle = $(fenceEle).find(".FenceList")[0];
+        var fenceList = $(fenceListEle).val().split(";");
+
+        var bounds = new google.maps.LatLngBounds();
+
+        var path = poly.getPath();
+        path.clear();
+
+        if (fenceList.length > 1) {
+            // Edit
+            fenceList.map(function (item) {
+                var itmArr = item.split(",");
+                var latLng = new google.maps.LatLng(parseFloat(itmArr[0]), parseFloat(itmArr[1]));
+                path.push(latLng);
+                bounds.extend(latLng);
+            });
+
+            map.panToBounds(bounds);
+
+            google.maps.event.addListener(poly, 'click', function (edge) {
+                if (typeof (edge.vertex) !== "undefined") {
+                    path.removeAt(edge.vertex);
+                }
+            });
+        }
+        else {
+            // Create
+            google.maps.event.addListener(map, 'click', function (event) {
+                path.push(event.latLng);
+            });
+        }
+    }
+
+    function getFencePathToSave(fenceEditEle) {
+        var path = poly.getPath();
+
+        var points = path.getArray().map(function (item) {
+            return item.lat() + ", " + item.lng();
+        });
+
+        var fenceListEleVal = points.join(";");
+
+        var fenceEle = $(fenceEditEle).parents("li.fenceGroup")[0];
+        var fenceListEle = $(fenceEle).find(".FenceList")[0];
+        $(fenceListEle).val(fenceListEleVal);
+    }
+
+    function removeMapClickListener() {
+        google.maps.event.clearListeners(map, 'click');
+    }
+
+    $(document).ready(function () {
+        initMap();
+    });
+</script>
+@{
+    if (!Request.IsAjaxRequest())
+    {
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBWUc0EJoamD0c5KFiXjdvrcSj-8qfFwDo&libraries=places"></script>
+    }
+}

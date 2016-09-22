@@ -1,0 +1,74 @@
+﻿@model TMS.Web.Models.ViewModels.ScheduleViewModel
+
+@{
+    ViewBag.Title = "Schedule";
+    Layout = "~/Views/Shared/_LayoutLTE.cshtml";
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<div id="">
+    <div style="display: block;">
+        @{
+            var AlertTypeSelect = Model.AlertTypes.Where(m => m != Tracker.Common.Model.DeviceAlarmType.FenceAlarm).Select(m => new SelectListItem() { Text = m.ToString(), Value = m.ToString() }).ToList();
+            AlertTypeSelect = AlertTypeSelect ?? new List<SelectListItem>();
+            AlertTypeSelect.Insert(0, new SelectListItem() { Text = "--Select--", Value = "0" });
+
+
+            var DevicesUl = Model.Devices.Select(m => new SelectListItem() { Text = m, Value = m }).ToList();
+            DevicesUl = DevicesUl ?? new List<SelectListItem>();
+            DevicesUl.Insert(0, new SelectListItem() { Text = "--Select--", Value = "0" });
+        }
+        @using (Html.BeginForm("Schedule", "Alert", FormMethod.Get, new { @style="margin-bottom: 10px;"}))
+        {
+            <table>
+                <tr>
+                    <td style="padding-right:10px;vertical-align: bottom;">
+                        <label>Alert type</label>
+                        @Html.DropDownList("AlertType", AlertTypeSelect, new { @class = "form-control" })
+                    </td>
+                    <td style="padding-right:10px;vertical-align: bottom;">
+                        <label>Devices</label>
+                        @Html.DropDownList("DeviceId", DevicesUl, new { @class = "form-control" })
+                    </td>
+                    <td style="vertical-align: bottom;">
+                        <label>&nbsp;</label>
+                        <input type="submit" value="Go" class="btn btn-primary" />
+                    </td>
+                </tr>
+            </table>
+        }
+
+        <div id="AlertScheduleAjaxUpdateId" style="display: block; vertical-align: top;">
+            @{Html.RenderPartial("_Schedule", Model);}
+        </div>
+
+
+
+
+
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        SetupToastr();
+    });
+</script>
+
+<div class="modal fade" id="AlertScheduleReceiversModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add / Edit Receivers</h4>
+            </div>
+            <div class="modal-body">
+                <div id="AlertScheduleReceiversAjaxUpdateId" style="display: block; vertical-align: top;">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

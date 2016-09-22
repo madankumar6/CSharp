@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gps Tracking App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="~/Content/font-family-Lato.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/ionicons.min.css" rel="stylesheet" />
+    <link href="~/Content/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/AdminLTE.min.css" rel="stylesheet" />
+    <link href="~/Content/_all-skins.min.css" rel="stylesheet" />
+    <link href="~/Content/select.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/toastr.min.css" rel="stylesheet" />
+
+    <!-- jQuery 2.1.4 -->
+    <script src="~/Scripts/jQuery-2.1.4.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/dataTables.bootstrap.min.js"></script>
+    <script src="~/Scripts/dataTables.select.min.js"></script>
+    <script src="~/Scripts/toastr.min.js"></script>
+    <script src="~/Scripts/app.min.js"></script>
+    <script src="~/Scripts/Custom/updateDataTableSelectAllCtrl.js"></script>
+    <script src="~/Scripts/Custom/SetupToastr.js"></script>
+    
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBWUc0EJoamD0c5KFiXjdvrcSj-8qfFwDo&libraries=places"></script>
+
+    <script src="~/Scripts/Custom/CMarkerConfig.js"></script>
+    <script src="~/Scripts/Custom/CMarker.js"></script>
+    <script src="~/Scripts/Custom/App.js"></script>
+    
+    @RenderSection("scripts", required: false)
+</head>
+<body class="skin-blue sidebar-mini sidebar-collapse">
+    <div style="display: none; visibility: hidden;">
+
+        <img id="MarkerImage-Car" src="~/Images/map-markers/map-UI-car.png" />
+        <img id="MarkerImage-Bike" src="~/Images/map-markers/map-UI-gray.png" />
+        <img id="MarkerImage-Truck" src="~/Images/map-markers/map-UI-green.png" />
+        <img id="MarkerImage-Bus" src="~/Images/map-markers/map-UI-red.png" />
+
+    </div>
+    <div class="wrapper">
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="#" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>FTS</b></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>Focus</b>Tracking System</span>
+            </a>
+
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- Control Sidebar Toggle Button -->
+                        <li>
+                            <a href="#" data-toggle="control-sidebar"><i class="fa fa-arrow-circle-down"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar" style="height: auto;">
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu">
+                    @{
+                        List<TMS.Model.MenuItem> result = Session["Menus"] as List<TMS.Model.MenuItem>;
+
+                        if (result != null)
+                        {
+                            result = result.OrderBy(m => m.MenuOrder).ToList();
+                            foreach (var menu in result)
+                            {
+                                if (menu.Children == null || menu.Children.Count == 0)
+                                {
+                                    <li><a href="@(Url.Action(menu.Action, menu.Controller))"><i class="@menu.CSSClass"></i><span>@menu.Text</span></a></li>
+                                }
+                                else
+                                {
+                                    <li class="treeview">
+                                        <a href="#">
+                                            <i class="@menu.CSSClass"></i>
+                                            <span>@menu.Text</span>
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            @*@Helpers.BuildMenu(menu.Children)*@
+                                            @foreach (var subMenu in menu.Children.OrderBy(m => m.MenuOrder).ToList())
+                                            {
+                                                <li><a href="@(Url.Action(subMenu.Action, subMenu.Controller))"><i class="fa fa-circle-o"></i>@subMenu.Text</a></li>
+                                            }
+                                        </ul>
+                                    </li>
+                                }
+                            }
+                        }
+                    }
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            @*<section class="content-header">
+                    <h1>
+                        Dashboard
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li class="active">TMS</li>
+                    </ol>
+                </section>*@
+
+            <!-- Main content -->
+            <section class="content">
+                @RenderBody()
+            </section><!-- /.content -->
+        </div><!-- /.content-wrapper -->
+
+
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>TMS</b>
+            </div>
+            <strong>Copyright &copy; @DateTime.Now.Year <a href="http://noobiecode.com">NoobieCode</a>.</strong> All rights reserved.
+        </footer>
+    </div>
+
+</body>
+</html>

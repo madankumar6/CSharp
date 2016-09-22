@@ -1,0 +1,172 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracker.Common", "Tracker.Common\Tracker.Common.csproj", "{342CC9DB-3268-4B69-8BB9-4908F6FD1AE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{07551B60-EF4A-4F15-B2E0-072671DE8B6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{E58A4EC6-D33D-4EB2-8EB0-5A9D6910DC46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.Model", "TMS.Model\TMS.Model.csproj", "{10285AB5-A728-476B-8C31-03ECA2E6571D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.DAL", "TMS.DAL\TMS.DAL.csproj", "{8D47D1AA-E751-40EC-81B3-4FAF1BEA5693}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.BusinessRule", "TMS.BusinessRule\TMS.BusinessRule.csproj", "{52FE3784-22DB-4E44-A582-D909475D6E51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.Web", "TMS.Web\TMS.Web.csproj", "{91B1C871-AB84-4990-B1A7-B9D310E68709}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.Web.Tests", "TMS.Web.Tests\TMS.Web.Tests.csproj", "{96372B8C-EEED-4434-B878-52FF559FA817}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.Console", "TMS.Console\TMS.Console.csproj", "{03C9F502-4572-4963-B1F4-A497956B06C2}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Tracker.DB", "Tracker.DB\Tracker.DB.sqlproj", "{4E005396-B972-4A07-8924-5F125C628C85}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{342CC9DB-3268-4B69-8BB9-4908F6FD1AE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{342CC9DB-3268-4B69-8BB9-4908F6FD1AE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{342CC9DB-3268-4B69-8BB9-4908F6FD1AE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{342CC9DB-3268-4B69-8BB9-4908F6FD1AE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{342CC9DB-3268-4B69-8BB9-4908F6FD1AE1}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{07551B60-EF4A-4F15-B2E0-072671DE8B6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07551B60-EF4A-4F15-B2E0-072671DE8B6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07551B60-EF4A-4F15-B2E0-072671DE8B6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07551B60-EF4A-4F15-B2E0-072671DE8B6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07551B60-EF4A-4F15-B2E0-072671DE8B6E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E58A4EC6-D33D-4EB2-8EB0-5A9D6910DC46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E58A4EC6-D33D-4EB2-8EB0-5A9D6910DC46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E58A4EC6-D33D-4EB2-8EB0-5A9D6910DC46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E58A4EC6-D33D-4EB2-8EB0-5A9D6910DC46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10285AB5-A728-476B-8C31-03ECA2E6571D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10285AB5-A728-476B-8C31-03ECA2E6571D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10285AB5-A728-476B-8C31-03ECA2E6571D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10285AB5-A728-476B-8C31-03ECA2E6571D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D47D1AA-E751-40EC-81B3-4FAF1BEA5693}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D47D1AA-E751-40EC-81B3-4FAF1BEA5693}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D47D1AA-E751-40EC-81B3-4FAF1BEA5693}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D47D1AA-E751-40EC-81B3-4FAF1BEA5693}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52FE3784-22DB-4E44-A582-D909475D6E51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52FE3784-22DB-4E44-A582-D909475D6E51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52FE3784-22DB-4E44-A582-D909475D6E51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52FE3784-22DB-4E44-A582-D909475D6E51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52FE3784-22DB-4E44-A582-D909475D6E51}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{91B1C871-AB84-4990-B1A7-B9D310E68709}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91B1C871-AB84-4990-B1A7-B9D310E68709}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91B1C871-AB84-4990-B1A7-B9D310E68709}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91B1C871-AB84-4990-B1A7-B9D310E68709}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91B1C871-AB84-4990-B1A7-B9D310E68709}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{96372B8C-EEED-4434-B878-52FF559FA817}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96372B8C-EEED-4434-B878-52FF559FA817}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96372B8C-EEED-4434-B878-52FF559FA817}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96372B8C-EEED-4434-B878-52FF559FA817}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03C9F502-4572-4963-B1F4-A497956B06C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03C9F502-4572-4963-B1F4-A497956B06C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03C9F502-4572-4963-B1F4-A497956B06C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03C9F502-4572-4963-B1F4-A497956B06C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E005396-B972-4A07-8924-5F125C628C85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E005396-B972-4A07-8924-5F125C628C85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E005396-B972-4A07-8924-5F125C628C85}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{4E005396-B972-4A07-8924-5F125C628C85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E005396-B972-4A07-8924-5F125C628C85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E005396-B972-4A07-8924-5F125C628C85}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://devicetrack.visualstudio.com/
+		SccProjectUniqueName0 = Utils\\Utils.csproj
+		SccProjectName0 = Utils
+		SccAuxPath0 = https://devicetrack.visualstudio.com
+		SccLocalPath0 = Utils
+		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName1 = Tracker.Common\\Tracker.Common.csproj
+		SccProjectName1 = Tracker.Common
+		SccAuxPath1 = https://devicetrack.visualstudio.com
+		SccLocalPath1 = Tracker.Common
+		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName2 = DAL\\DAL.csproj
+		SccProjectName2 = DAL
+		SccAuxPath2 = https://devicetrack.visualstudio.com
+		SccLocalPath2 = DAL
+		SccProvider2 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName3 = Tracker.DB\\Tracker.DB.sqlproj
+		SccProjectName3 = Tracker.DB
+		SccAuxPath3 = https://devicetrack.visualstudio.com
+		SccLocalPath3 = Tracker.DB
+		SccProvider3 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName4 = TMS.Model\\TMS.Model.csproj
+		SccProjectName4 = TMS.Model
+		SccAuxPath4 = https://devicetrack.visualstudio.com
+		SccLocalPath4 = TMS.Model
+		SccProvider4 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName5 = TMS.DAL\\TMS.DAL.csproj
+		SccProjectName5 = TMS.DAL
+		SccAuxPath5 = https://devicetrack.visualstudio.com
+		SccLocalPath5 = TMS.DAL
+		SccProvider5 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName6 = TMS.BusinessRule\\TMS.BusinessRule.csproj
+		SccProjectName6 = TMS.BusinessRule
+		SccAuxPath6 = https://devicetrack.visualstudio.com
+		SccLocalPath6 = TMS.BusinessRule
+		SccProvider6 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName7 = TMS.Web\\TMS.Web.csproj
+		SccProjectName7 = TMS.Web
+		SccAuxPath7 = https://devicetrack.visualstudio.com
+		SccLocalPath7 = TMS.Web
+		SccProvider7 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName8 = TMS.Web.Tests\\TMS.Web.Tests.csproj
+		SccProjectName8 = TMS.Web.Tests
+		SccAuxPath8 = https://devicetrack.visualstudio.com
+		SccLocalPath8 = TMS.Web.Tests
+		SccProvider8 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://devicetrack.visualstudio.com/defaultcollection
+		SccProjectUniqueName0 = Utils\\Utils.csproj
+		SccProjectName0 = Utils
+		SccAuxPath0 = https://devicetrack.visualstudio.com/defaultcollection
+		SccLocalPath0 = Utils
+		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName1 = Tracker.Common\\Tracker.Common.csproj
+		SccProjectName1 = Tracker.Common
+		SccAuxPath1 = https://devicetrack.visualstudio.com/defaultcollection
+		SccLocalPath1 = Tracker.Common
+		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName2 = DAL\\DAL.csproj
+		SccProjectName2 = DAL
+		SccAuxPath2 = https://devicetrack.visualstudio.com/defaultcollection
+		SccLocalPath2 = DAL
+		SccProvider2 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName3 = Tracker.Common\\Tracker.Common.csproj
+		SccProjectName3 = Tracker.Common
+		SccAuxPath3 = https://devicetrack.visualstudio.com/defaultcollection
+		SccLocalPath3 = Tracker.Common
+		SccProvider3 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName4 = DAL\\DAL.csproj
+		SccProjectName4 = DAL
+		SccAuxPath4 = https://devicetrack.visualstudio.com/defaultcollection
+		SccLocalPath4 = DAL
+		SccProvider4 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName5 = Utils\\Utils.csproj
+		SccProjectName5 = Utils
+		SccAuxPath5 = https://devicetrack.visualstudio.com/defaultcollection
+		SccLocalPath5 = Utils
+		SccProvider5 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccProjectUniqueName6 = TrackerManagementSystem.Web\\TrackerManagementSystem.Web.csproj
+		SccProjectName6 = TrackerManagementSystem.Web
+		SccAuxPath6 = https://devicetrack.visualstudio.com/defaultcollection
+		SccLocalPath6 = TrackerManagementSystem.Web
+		SccProvider6 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+	EndGlobalSection
+EndGlobal

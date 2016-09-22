@@ -1,0 +1,108 @@
+﻿@model TMS.Web.Models.ViewModels.StoppageAlert
+
+@{
+    Layout = null;
+}
+
+@{
+    if (Model != null)
+    {
+        <div>
+            <div>
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="box box-info">
+                            <div class="form-horizontal" style="position: relative;">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Alert Setting</h3>
+                                </div>
+                                <div class="box-header with-border">
+                                    <input type="hidden" name="Id" class="Id" id="Id" value="@Model.Id" />
+                                    <div class="">
+                                        <div class="form-group">
+                                            <label for="inputSpeedLimit" class="col-sm-4 control-label">Name</label>
+                                            <div class="col-sm-6">
+                                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputSpeedLimit" class="col-sm-4 control-label">Description</label>
+                                            <div class="col-sm-6">
+                                                @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-12">Vehicle which stays at the same place for the</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputSpeedLimit" class="col-sm-4 control-label">Duration Of</label>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.Duration, new { @class = "form-control" }) Minutes
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-4 col-sm-6">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        @Html.CheckBoxFor(m => m.IsActive)
+                                                        Is Active
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @if (Model.Id != 0)
+                                    {
+                                        @Ajax.ActionLink("Set Alert Receivers", "AlertReceivers", "Alerts", new { AlertId = Model.Id }, new AjaxOptions()
+                                   {
+                                       UpdateTargetId = "AlertScheduleReceiversAjaxUpdateId",
+                                       InsertionMode = InsertionMode.Replace,
+                                       HttpMethod = "GET",
+                                       OnSuccess = "$('#AlertScheduleReceiversModal').modal();"
+                                   }, new { @class = "btn btn-info pull-right" })
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="box box-info">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Device Activation</h3>
+                            </div>
+                            <form class="form-horizontal">
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <div class="col-sm-10">
+                                            @if (Model.Devices != null && Model.Devices.Count > 0)
+                                            {
+                                                for (int i = 0; i < Model.Devices.Count; i++)
+                                                {
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            @Html.HiddenFor(m => Model.Devices[i].DeviceId)
+                                                            @Html.HiddenFor(m => Model.Devices[i].VehicleId)
+                                                            @Html.CheckBoxFor(m => Model.Devices[i].Checked)
+                                                            @Model.Devices[i].VehicleId
+                                                        </label>
+                                                    </div>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <span style="color: #F00;">No devices are active</span>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-info pull-right">Save</button>
+                </div>
+            </div>
+        </div>
+    }
+}
