@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Attributes", "Attributes\At
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Collection Classes", "Collection Classes", "{FC372809-329A-4A8C-BF2D-85C99BCA2FE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectionClassI", "Collection Classes\CollectionClassI\CollectionClassI.csproj", "{0689F3DF-E1CF-413A-AB87-E994AB3A8F07}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectionClass", "Collection Classes\CollectionClassI\CollectionClass.csproj", "{0689F3DF-E1CF-413A-AB87-E994AB3A8F07}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Threading", "Threading", "{045958CC-20E2-4AC2-B3E7-F02C891E5FFB}"
 EndProject
