@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringCharacterFormatting", "StringCharacterFormatting\StringCharacterFormatting.csproj", "{033A55B3-DBD6-4947-A325-3A1F9D55B7BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{033A55B3-DBD6-4947-A325-3A1F9D55B7BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{033A55B3-DBD6-4947-A325-3A1F9D55B7BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{033A55B3-DBD6-4947-A325-3A1F9D55B7BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{033A55B3-DBD6-4947-A325-3A1F9D55B7BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9DF21F1B-26DC-4D82-BA99-A45A81546F2D}
+	EndGlobalSection
+EndGlobal
